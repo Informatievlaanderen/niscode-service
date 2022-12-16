@@ -1,0 +1,14 @@
+﻿{
+  "profiles": {
+    "NisCodeService": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5014",
+      "launchUrl": "niscode/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
