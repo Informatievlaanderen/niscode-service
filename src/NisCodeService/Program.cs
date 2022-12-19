@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using NisCodeService.Endpoints;
 using NisCodeService.Ëxtensions;
+using NisCodeService.Sync.OrganizationRegistry.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +26,9 @@ builder.Configuration
 
 // add dependencies
 builder.Services
+    .AddOrganizationRegistryNisCodeReader()
     .AddNisCodeService()
-    .AddHealthChecks();
+    .AddNisCodeServiceHealthChecks();
 
 // add security
 builder.Services
@@ -68,6 +70,7 @@ app.UseSwaggerUI();
 
 app.Run();
 
+// needed for integration tests
 public partial class Program
 {
     protected Program()
