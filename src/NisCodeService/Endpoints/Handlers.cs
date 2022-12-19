@@ -7,6 +7,6 @@ namespace NisCodeService.Endpoints
     public static class Handlers
     {
         public static async Task<string?> Get(string ovoCode, INisCodeService nisCodeService, CancellationToken cancellationToken = default)
-            => await nisCodeService.Get(ovoCode, cancellationToken);
+            => await nisCodeService.Get(ovoCode.WithoutOvoPrefix() ?? "bad ovo code", cancellationToken);
     }
 }

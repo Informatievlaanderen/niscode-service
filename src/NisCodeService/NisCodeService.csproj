@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj" />
+    <ProjectReference Include="..\NisCodeService.Sync.OrganizationRegistry\NisCodeService.Sync.OrganizationRegistry.csproj" />
   </ItemGroup>
 
   <ItemGroup>

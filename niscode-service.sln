@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NisCodeService", "src\NisCodeService\NisCodeService.csproj", "{835B61E3-3487-4D65-A6D7-E53AEC0E9F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService", "src\NisCodeService\NisCodeService.csproj", "{835B61E3-3487-4D65-A6D7-E53AEC0E9F83}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Abstractions", "src\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj", "{49AEF7FA-4FD6-4A34-867F-E57F000D15A7}"
 EndProject
@@ -18,11 +18,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NisCodeService.IntegrationTests", "test\NisCodeService.IntegrationTests\NisCodeService.IntegrationTests.csproj", "{61CFD894-CA38-4F80-9C9A-2A70D8BC00A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.IntegrationTests", "test\NisCodeService.IntegrationTests\NisCodeService.IntegrationTests.csproj", "{61CFD894-CA38-4F80-9C9A-2A70D8BC00A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9CB3983B-FF27-4E89-A810-F7F645FC8274}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{155FF959-48BC-4039-8DA4-374E6CF7E492}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Sync.HardCoded", "src\NisCodeService.Sync.HardCoded\NisCodeService.Sync.HardCoded.csproj", "{7240985F-1D5C-4904-B69C-D82BEE66A2D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Sync.OrganizationRegistry", "src\NisCodeService.Sync.OrganizationRegistry\NisCodeService.Sync.OrganizationRegistry.csproj", "{ACBA827F-8F0D-4448-9421-4778BFD27C9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NisCodeService.Sync.HardCoded.Tests", "test\NisCodeService.Sync.HardCoded.Tests\NisCodeService.Sync.HardCoded.Tests.csproj", "{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NisCodeService.Sync.OrganizationRegistry.Tests", "test\NisCodeService.Sync.OrganizationRegistry.Tests\NisCodeService.Sync.OrganizationRegistry.Tests.csproj", "{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +50,22 @@ Global
 		{61CFD894-CA38-4F80-9C9A-2A70D8BC00A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61CFD894-CA38-4F80-9C9A-2A70D8BC00A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61CFD894-CA38-4F80-9C9A-2A70D8BC00A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7240985F-1D5C-4904-B69C-D82BEE66A2D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7240985F-1D5C-4904-B69C-D82BEE66A2D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7240985F-1D5C-4904-B69C-D82BEE66A2D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7240985F-1D5C-4904-B69C-D82BEE66A2D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACBA827F-8F0D-4448-9421-4778BFD27C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACBA827F-8F0D-4448-9421-4778BFD27C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACBA827F-8F0D-4448-9421-4778BFD27C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACBA827F-8F0D-4448-9421-4778BFD27C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +74,10 @@ Global
 		{835B61E3-3487-4D65-A6D7-E53AEC0E9F83} = {155FF959-48BC-4039-8DA4-374E6CF7E492}
 		{49AEF7FA-4FD6-4A34-867F-E57F000D15A7} = {155FF959-48BC-4039-8DA4-374E6CF7E492}
 		{61CFD894-CA38-4F80-9C9A-2A70D8BC00A0} = {9CB3983B-FF27-4E89-A810-F7F645FC8274}
+		{7240985F-1D5C-4904-B69C-D82BEE66A2D4} = {155FF959-48BC-4039-8DA4-374E6CF7E492}
+		{ACBA827F-8F0D-4448-9421-4778BFD27C9C} = {155FF959-48BC-4039-8DA4-374E6CF7E492}
+		{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA} = {9CB3983B-FF27-4E89-A810-F7F645FC8274}
+		{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089} = {9CB3983B-FF27-4E89-A810-F7F645FC8274}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB8D6A6F-B06E-4C81-A00A-EBBBA9DB308A}

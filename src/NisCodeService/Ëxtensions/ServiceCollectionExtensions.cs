@@ -6,7 +6,7 @@ namespace NisCodeService.Ëxtensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddHealthChecksX(this IServiceCollection services)
+    public static IServiceCollection AddNisCodeServiceHealthChecks(this IServiceCollection services)
     {
         services.AddHealthChecks()
             .AddCheck("Health", () => HealthCheckResult.Healthy());
