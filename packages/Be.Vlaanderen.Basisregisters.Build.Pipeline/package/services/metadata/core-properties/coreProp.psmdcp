@@ -3,7 +3,7 @@
   <dc:creator>Basisregisters Vlaanderen</dc:creator>
   <dc:description>Contains generic files for Basisregisters Vlaanderen pipelines.</dc:description>
   <dc:identifier>Be.Vlaanderen.Basisregisters.Build.Pipeline</dc:identifier>
-  <version>6.0.5</version>
+  <version>6.0.6</version>
   <keywords />
   <dc:title>Be.Vlaanderen.Basisregisters.Build.Pipeline</dc:title>
   <lastModifiedBy>paket</lastModifiedBy>
