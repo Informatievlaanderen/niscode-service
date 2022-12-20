@@ -42,8 +42,7 @@ jobs:
     - name: Restore packages
       shell: bash
       run: |
-        dotnet tool restore
-        dotnet paket install
+        dotnet restore
 
     - name: Cache SonarCloud packages
       uses: actions/cache@v1
