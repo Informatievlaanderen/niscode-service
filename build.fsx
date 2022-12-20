@@ -47,12 +47,16 @@ Target.create "Publish_Solution" (fun _ ->
   [
     "NisCodeService"
     "NisCodeService.Abstractions"
+    "NisCodeService.Sync.HardCoded"
+    "NisCodeService.Sync.OrganizationRegistry"
   ] |> List.iter publishSource)
 
 Target.create "Pack_Solution" (fun _ ->
   [
     "NisCodeService"
     "NisCodeService.Abstractions"
+    "NisCodeService.Sync.HardCoded"
+    "NisCodeService.Sync.OrganizationRegistry"
   ] |> List.iter pack)
 
 Target.create "Containerize_NisCodeService" (fun _ -> containerize "NisCodeService" "niscode")
