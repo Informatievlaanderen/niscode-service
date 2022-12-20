@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Abstractions;
 using NisCodeService.Abstractions;
 using Xunit;
 
@@ -22,7 +24,7 @@ namespace NisCodeService.Sync.OrganizationRegistry.Tests
 
             INisCodeReader reader = new OrganizationRegistryNisCodeReader(services.GetRequiredService<IHttpClientFactory>());
             var dictionary = new Dictionary<string, string>();
-            await reader.ReadNisCodes(dictionary);
+            await reader.ReadNisCodes(dictionary, new NullLoggerFactory(), CancellationToken.None);
 
             Assert.True(dictionary.ContainsKey(ovoCode ?? "bad ovo code"));
             Assert.Equal(expectedResult, dictionary[ovoCode ?? "bad ovo code"]);

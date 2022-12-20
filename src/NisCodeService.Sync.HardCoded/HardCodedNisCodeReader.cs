@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using NisCodeService.Abstractions;
 
 namespace NisCodeService.Sync.HardCoded
@@ -340,8 +342,11 @@ namespace NisCodeService.Sync.HardCoded
             ["003307"] = "V0050"
         };
 
-        public Task ReadNisCodes(IDictionary<string, string> cache, CancellationToken cancellationToken = default)
+        public Task ReadNisCodes(IDictionary<string, string> cache, ILoggerFactory loggerFactory, CancellationToken cancellationToken = default)
         {
+            var logger = loggerFactory.CreateLogger<HardCodedNisCodeReader>();
+            logger.LogInformation("Refresh cache: started at {dateTime}", DateTime.UtcNow);
+
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.CompletedTask;
@@ -353,6 +358,7 @@ namespace NisCodeService.Sync.HardCoded
                 cache.Add(item.Key, item.Value);
             }
 
+            logger.LogInformation("Refresh cache: ended at {dateTime}", DateTime.UtcNow);
             return Task.CompletedTask;
         }
     }

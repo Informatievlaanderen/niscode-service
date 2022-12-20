@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NisCodeService.Abstractions;
 using NisCodeService.Sync.OrganizationRegistry.Models;
@@ -20,8 +21,11 @@ namespace NisCodeService.Sync.OrganizationRegistry
             _factory = factory;
         }
 
-        public async Task ReadNisCodes(IDictionary<string, string> cache, CancellationToken cancellationToken = default)
+        public async Task ReadNisCodes(IDictionary<string, string> cache, ILoggerFactory loggerFactory, CancellationToken cancellationToken = default)
         {
+            var logger = loggerFactory.CreateLogger<OrganizationRegistryNisCodeReader>();
+            logger.LogInformation("Refresh cache: started at {dateTime}", DateTime.UtcNow);
+
             cache.Clear();
 
             const string url = "https://api.wegwijs.vlaanderen.be/v1/search/organisations?q=keys.keyTypeName:NIS&fields=keys,ovoNumber&scroll=true";
@@ -55,6 +59,8 @@ namespace NisCodeService.Sync.OrganizationRegistry
                     await InternalReadNisCodes(response, cache, cancellationToken);
                 }
             }
+
+            logger.LogInformation("Refresh cache: ended at {dateTime}", DateTime.UtcNow);
         }
 
         private async Task InternalReadNisCodes(HttpResponseMessage response, IDictionary<string, string> cache, CancellationToken cancellationToken)
