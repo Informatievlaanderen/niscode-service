@@ -18,5 +18,5 @@ dependencies
   framework: net6.0
 
 files
-  NisCodeService.Sync.HardCoded.dll => lib\net6.0
-  NisCodeService.Sync.HardCoded.pdb => lib\net6.0
+  bin\Release\net6.0\NisCodeService.Sync.HardCoded.dll => lib\net6.0
+  bin\Release\net6.0\NisCodeService.Sync.HardCoded.pdb => lib\net6.0
