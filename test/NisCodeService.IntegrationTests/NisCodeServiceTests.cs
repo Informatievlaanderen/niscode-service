@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
-using NisCodeService.Ëxtensions;
+using NisCodeService.Extensions;
 using NisCodeService.Sync.OrganizationRegistry.Extensions;
 using Xunit;
 

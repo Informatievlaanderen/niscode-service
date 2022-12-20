@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using NisCodeService.Abstractions;
 
-namespace NisCodeService.Ëxtensions;
+namespace NisCodeService.Extensions;
 
 public static class ServiceCollectionExtensions
 {
