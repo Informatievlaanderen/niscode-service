@@ -22,6 +22,10 @@
   <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.App.props" />
 
   <ItemGroup>
+	  <InternalsVisibleTo Include="NisCodeService.IntegrationTests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj" />
     <ProjectReference Include="..\NisCodeService.Sync.OrganizationRegistry\NisCodeService.Sync.OrganizationRegistry.csproj" />
   </ItemGroup>
