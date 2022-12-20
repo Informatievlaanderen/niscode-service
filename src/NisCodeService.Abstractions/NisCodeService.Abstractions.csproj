@@ -5,5 +5,8 @@
 		<!-- Error NETSDK1152: https://docs.microsoft.com/en-us/dotnet/core/compatibility/sdk/6.0/duplicate-files-in-output -->
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="Be.Vlaanderen.Basisregisters.Build.Pipeline" Version="6.0.6" />
+	</ItemGroup>
 
 </Project>
