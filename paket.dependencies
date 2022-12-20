@@ -13,6 +13,7 @@ nuget Swashbuckle.AspNetCore.SwaggerGen 6.4.0
 nuget Swashbuckle.AspNetCore.SwaggerUI 6.4.0
 nuget Microsoft.Extensions.DependencyInjection.Abstractions 6.0.0
 nuget Microsoft.Extensions.Http 6.0.0
+nuget Microsoft.Extensions.Logging.Abstractions 6.0.3
 nuget Newtonsoft.Json 13.0.2
 
 // TEST STUFF
