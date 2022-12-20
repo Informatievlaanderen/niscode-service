@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Be.Vlaanderen.Basisregisters.Build.Pipeline</id>
+    <version>6.0.5</version>
+    <title>Be.Vlaanderen.Basisregisters.Build.Pipeline</title>
+    <authors>Basisregisters Vlaanderen</authors>
+    <owners>Digitaal Vlaanderen &lt;https://www.vlaanderen.be/digitaal-vlaanderen&gt;</owners>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/Informatievlaanderen/build-pipeline</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Informatievlaanderen/build-pipeline/master/logo.png</iconUrl>
+    <description>Contains generic files for Basisregisters Vlaanderen pipelines.</description>
+    <copyright>Copyright (c) Digitaal Vlaanderen</copyright>
+    <dependencies>
+      <group targetFramework="netstandard2.0">
+        <dependency id="Newtonsoft.Json" version="13.0.1" />
+        <dependency id="Fake.Core.Environment" version="5.22.0" />
+        <dependency id="Fake.Core.Process" version="5.22.0" />
+        <dependency id="Fake.Core.Target" version="5.22.0" />
+        <dependency id="Fake.DotNet.AssemblyInfoFile" version="5.22.0" />
+        <dependency id="Fake.DotNet.Cli" version="5.22.0" />
+        <dependency id="Fake.DotNet.Paket" version="5.22.0" />
+        <dependency id="Fake.IO.FileSystem" version="5.22.0" />
+        <dependency id="Fake.JavaScript.Npm" version="5.22.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
