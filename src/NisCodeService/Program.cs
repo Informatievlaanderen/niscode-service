@@ -69,10 +69,3 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.Run();
-
-// needed for integration tests
-public partial class Program
-{
-    protected Program()
-    { }
-}
