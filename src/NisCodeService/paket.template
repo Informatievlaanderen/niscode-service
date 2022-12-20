@@ -1,0 +1,22 @@
+﻿type file
+version 1.0.0
+
+id Be.Vlaanderen.Basisregisters.NisCodeService
+title Be.Vlaanderen.Basisregisters.NisCodeService
+
+authors Basisregisters.Vlaanderen
+owners Vlaamse overheid
+copyright Copyright (c) Vlaamse overheid
+requireLicenseAcceptance false
+projectUrl https://vlaanderen.be/digitaal-vlaanderen
+iconUrl https://raw.githubusercontent.com/Informatievlaanderen/build-pipeline/master/logo.png
+licenseUrl https://opensource.org/licenses/EUPL-1.2
+
+description NisCodeService.
+
+dependencies
+  framework: net6.0
+
+files
+  NisCodeService.dll => lib\net6.0
+  NisCodeService.pdb => lib\net6.0

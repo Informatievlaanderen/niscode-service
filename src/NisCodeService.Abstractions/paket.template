@@ -1,0 +1,22 @@
+﻿type file
+version 1.0.0
+
+id Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions
+title Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions
+
+authors Basisregisters.Vlaanderen
+owners Vlaamse overheid
+copyright Copyright (c) Vlaamse overheid
+requireLicenseAcceptance false
+projectUrl https://vlaanderen.be/digitaal-vlaanderen
+iconUrl https://raw.githubusercontent.com/Informatievlaanderen/build-pipeline/master/logo.png
+licenseUrl https://opensource.org/licenses/EUPL-1.2
+
+description NisCodeService Abstractions.
+
+dependencies
+  framework: net6.0
+
+files
+  NisCodeService.Abstractions.dll => lib\net6.0
+  NisCodeService.Abstractions.pdb => lib\net6.0
