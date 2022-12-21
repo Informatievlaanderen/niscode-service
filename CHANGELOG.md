@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.3...v1.0.4) (2022-12-21)
+
+
+### Bug Fixes
+
+* fix nuget ([c24a3e4](https://github.com/informatievlaanderen/niscode-service/commit/c24a3e444b3e939c01032a5ff91fc5f7606f261f))
+
 ## [1.0.3](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.2...v1.0.3) (2022-12-21)
 
 
