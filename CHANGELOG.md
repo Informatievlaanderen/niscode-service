@@ -1,3 +1,11 @@
+## [1.0.5](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.4...v1.0.5) (2022-12-21)
+
+
+### Bug Fixes
+
+* add confluence debug ([376173b](https://github.com/informatievlaanderen/niscode-service/commit/376173b81f0080843fc8a7282d63981224b78cc5))
+* fix release.yml ([94ee902](https://github.com/informatievlaanderen/niscode-service/commit/94ee9020915186fd942d75ad3445a48b663a459d))
+
 ## [1.0.4](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.3...v1.0.4) (2022-12-21)
 
 
