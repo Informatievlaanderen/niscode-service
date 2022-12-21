@@ -1,3 +1,11 @@
+## [1.0.7](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.6...v1.0.7) (2022-12-21)
+
+
+### Bug Fixes
+
+* dummy commit ([9ef1fd6](https://github.com/informatievlaanderen/niscode-service/commit/9ef1fd6c0e351e869f14c6be26e03ec9eeac0a50))
+* remove FSharp.Core from paket.dependencies ([b98dd9e](https://github.com/informatievlaanderen/niscode-service/commit/b98dd9ef5bb01d75676cce08131ecff00b4da8ee))
+
 ## [1.0.6](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.5...v1.0.6) (2022-12-21)
 
 
