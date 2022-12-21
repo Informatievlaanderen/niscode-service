@@ -1,3 +1,36 @@
+# 1.0.0 (2022-12-21)
+
+
+### Bug Fixes
+
+* add build pipeline ([e71919a](https://github.com/informatievlaanderen/niscode-service/commit/e71919a2cbf2294326af7f4a82e4d2efb03c1301))
+* add dotnet-tools.json ([cff030a](https://github.com/informatievlaanderen/niscode-service/commit/cff030afd3ec5c371dc867d3777a0d13731459b6))
+* add logging ([34a123b](https://github.com/informatievlaanderen/niscode-service/commit/34a123ba97fc19729cd78f8ff75795dd58cbca86))
+* add npm dependencies ([3abf005](https://github.com/informatievlaanderen/niscode-service/commit/3abf00574ad60109192c062836dd8cf27a586c67))
+* add paket.dependencies ([30484ba](https://github.com/informatievlaanderen/niscode-service/commit/30484bac4c1bf03202cc53234b348b03f28c9fb1))
+* add paket.lock ([5b0d2ea](https://github.com/informatievlaanderen/niscode-service/commit/5b0d2ea70f6359ab91fac9f675839412ee85390c))
+* add paket.template files ([9b5ccfe](https://github.com/informatievlaanderen/niscode-service/commit/9b5ccfe64709bfd86b042cc2f0d675093f334a1f))
+* add workflows etc. ([120c744](https://github.com/informatievlaanderen/niscode-service/commit/120c74404d8234cfb2bdbc94f7e3f9a5fce0c4d9))
+* build/release ([830c65b](https://github.com/informatievlaanderen/niscode-service/commit/830c65ba03a2f7d30085534996e124e1094ace53))
+* change paket.template file path ([a60eaf9](https://github.com/informatievlaanderen/niscode-service/commit/a60eaf956079762a4ff31c8a635043c62b36cde4))
+* correct NisCodeService.Extensions namespace ([8aebc98](https://github.com/informatievlaanderen/niscode-service/commit/8aebc98313938c963ef636d2fea4738907d1c0d1))
+* fix build.fsx for build framework ([1fb17a8](https://github.com/informatievlaanderen/niscode-service/commit/1fb17a82d6db2cbcd77c81583ea5d8aa68ec7216))
+* fix dotnet restore ([d163990](https://github.com/informatievlaanderen/niscode-service/commit/d163990dfa9b670c1249562ac08aeb18c4e66108))
+* fix integration tests ([5dd0607](https://github.com/informatievlaanderen/niscode-service/commit/5dd06075c87baa837876ed49b8ac285fd8aadec0))
+* fix typo in paket.dependencies ([278760d](https://github.com/informatievlaanderen/niscode-service/commit/278760d4ff5a7cad5b599c9270448d7c32d6d7f5))
+* make build.sh executable ([825738d](https://github.com/informatievlaanderen/niscode-service/commit/825738d608029134880386f020fdd3bd433734e4))
+* pin FSharp.Core ([624b5b7](https://github.com/informatievlaanderen/niscode-service/commit/624b5b7edacb0a4b677b9a135ebce619c6af63fb))
+* really add build pipeline ([fc3ae37](https://github.com/informatievlaanderen/niscode-service/commit/fc3ae37baf6ec4c7bc1045235f2912bf8ad538e0))
+* remove build pipeline ([3fa95d9](https://github.com/informatievlaanderen/niscode-service/commit/3fa95d925e8847996f77478f8a9f7cb42f4aaa29))
+* unexpected character ([12eb136](https://github.com/informatievlaanderen/niscode-service/commit/12eb13648f1c8a21aeba0491847fe4dca7c62995))
+* use GITHUB_TOKEN ([bf8f278](https://github.com/informatievlaanderen/niscode-service/commit/bf8f2786eb5dbcc207ce7fc1844cea5cf0128413))
+
+
+### Features
+
+* initial commit ([9943037](https://github.com/informatievlaanderen/niscode-service/commit/99430376f1ced02a1e0de868ec7887a39db70dde))
+* sync with OR (or hardcoded) ([dbc79ac](https://github.com/informatievlaanderen/niscode-service/commit/dbc79ac512d76f675e7eb699e814a4b66ca65e24))
+
 ## [1.7.13](https://github.com/informatievlaanderen/ticketing-system/compare/v1.7.12...v1.7.13) (2022-11-03)
 
 
