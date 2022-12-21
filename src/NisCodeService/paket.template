@@ -16,7 +16,13 @@ description NisCodeService.
 
 dependencies
   framework: net6.0
+    Microsoft.Extensions.Logging.Abstractions >= LOCKEDVERSION
+    Microsoft.AspNetCore.Authentication.JwtBearer >= LOCKEDVERSION
 
 files
-  bin\Release\net6.0\NisCodeService.dll => lib\net6.0
-  bin\Release\net6.0\NisCodeService.pdb => lib\net6.0
+  NisCodeService.Sync.OrganizationRegistry.dll => lib\net6.0
+  NisCodeService.Sync.OrganizationRegistry.pdb => lib\net6.0
+  NisCodeService.Abstractions.dll => lib\net6.0
+  NisCodeService.Abstractions.pdb => lib\net6.0
+  NisCodeService.dll => lib\net6.0
+  NisCodeService.pdb => lib\net6.0

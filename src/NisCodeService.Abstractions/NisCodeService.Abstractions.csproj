@@ -10,7 +10,11 @@
 	<Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.Library.props" />
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.3" />
+	<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.3" />
 	</ItemGroup>
+
+  <ItemGroup>
+    <Content Include="paket.template" CopyToOutputDirectory="Always" />
+  </ItemGroup>
 
 </Project>

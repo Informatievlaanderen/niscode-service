@@ -16,7 +16,8 @@ description NisCodeService Abstractions.
 
 dependencies
   framework: net6.0
+    Microsoft.Extensions.Logging.Abstractions >= LOCKEDVERSION
 
 files
-  bin\Release\net6.0\NisCodeService.Abstractions.dll => lib\net6.0
-  bin\Release\net6.0\NisCodeService.Abstractions.pdb => lib\net6.0
+  NisCodeService.Abstractions.dll => lib\net6.0
+  NisCodeService.Abstractions.pdb => lib\net6.0
