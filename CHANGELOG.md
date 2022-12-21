@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.0...v1.0.1) (2022-12-21)
+
+
+### Bug Fixes
+
+* fix artifact names ([47894a1](https://github.com/informatievlaanderen/niscode-service/commit/47894a120351513752dc425a5b400e002da4f66e))
+
 # 1.0.0 (2022-12-21)
 
 
