@@ -195,17 +195,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests markdown argparse
 
-      - name: Debug steps
-        if: env.RELEASE_VERSION != 'none'
-        shell: bash
-        run: |
-          echo ls -al ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/
-          ls -al ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/
-    
       - name: Publish to Confluence
         if: needs.build.outputs.version != 'none'
         shell: bash
-        run: ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-confluence.sh
+        run: |
+          chmod +x ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/*
+          ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/ci-confluence.sh
         env:
           CONFLUENCE_TITLE: ${{ env.REPOSITORY_NAME }}
           CONFLUENCE_USERNAME: ${{ secrets.VBR_CONFLUENCE_USER }}
