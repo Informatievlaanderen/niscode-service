@@ -1,3 +1,12 @@
+## [1.0.3](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.2...v1.0.3) (2022-12-21)
+
+
+### Bug Fixes
+
+* change docker label ([c161af4](https://github.com/informatievlaanderen/niscode-service/commit/c161af4c2da48789c4c84dc205658bc45bbf75c7))
+* fix docker image names ([295fc25](https://github.com/informatievlaanderen/niscode-service/commit/295fc25417731f20555ba0ea4ada872ec7421353))
+* use correct git token ([efa411d](https://github.com/informatievlaanderen/niscode-service/commit/efa411d26ae9c9ab61ccd3e3ed8b3005d41dfd92))
+
 ## [1.0.2](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.1...v1.0.2) (2022-12-21)
 
 
