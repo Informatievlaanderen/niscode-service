@@ -89,7 +89,7 @@ jobs:
       run: npx semantic-release
       env:
         BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.VBR_GIT_RELEASE_TOKEN }}
         GIT_COMMIT: ${{ github.sha }}
         GIT_USERNAME: ${{ secrets.VBR_GIT_USER }}
         GIT_AUTHOR_NAME: ${{ secrets.VBR_GIT_USER }}
@@ -123,6 +123,15 @@ jobs:
     # Upload NuGet packages
     #
 
+    - name: Debug steps
+      if: env.RELEASE_VERSION != 'none'
+      shell: bash
+      run: |
+        echo ls -al /home/runner/work/niscode-service/niscode-service/dist
+        ls -al /home/runner/work/niscode-service/niscode-service/dist
+        echo ls -al /home/runner/work/niscode-service/niscode-service/dist/nuget
+        ls -al /home/runner/work/niscode-service/niscode-service/dist/nuget
+    
     - name: Upload NuGet package niscode-service
       if: env.RELEASE_VERSION != 'none'
       uses: actions/upload-artifact@v3
@@ -342,7 +351,7 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-niscodeservice-image.tar
+          docker image load -i ~/ns-niscode-image.tar
 
       - name: Push artifacts to ECR Staging
         if: needs.build.outputs.version != 'none'
@@ -392,7 +401,7 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-niscodeservice-image.tar
+          docker image load -i ~/ns-niscode-image.tar
 
       - name: Push artifacts to ECR Production
         if: needs.build.outputs.version != 'none'
