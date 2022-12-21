@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.5...v1.0.6) (2022-12-21)
+
+
+### Bug Fixes
+
+* make ci-confluence.sh executable ([88c27b4](https://github.com/informatievlaanderen/niscode-service/commit/88c27b405de3c662c13985bc8156b000806f2441))
+
 ## [1.0.5](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.4...v1.0.5) (2022-12-21)
 
 
