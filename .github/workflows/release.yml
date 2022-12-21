@@ -123,15 +123,6 @@ jobs:
     # Upload NuGet packages
     #
 
-    - name: Debug steps
-      if: env.RELEASE_VERSION != 'none'
-      shell: bash
-      run: |
-        echo ls -al /home/runner/work/niscode-service/niscode-service/dist
-        ls -al /home/runner/work/niscode-service/niscode-service/dist
-        echo ls -al /home/runner/work/niscode-service/niscode-service/dist/nuget
-        ls -al /home/runner/work/niscode-service/niscode-service/dist/nuget
-    
     - name: Upload NuGet package niscode-service
       if: env.RELEASE_VERSION != 'none'
       uses: actions/upload-artifact@v3
@@ -204,6 +195,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests markdown argparse
 
+    - name: Debug steps
+      if: env.RELEASE_VERSION != 'none'
+      shell: bash
+      run: |
+        echo ls -al ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/
+        ls -al ./packages/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/
+    
       - name: Publish to Confluence
         if: needs.build.outputs.version != 'none'
         shell: bash
