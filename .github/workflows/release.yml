@@ -114,7 +114,7 @@ jobs:
       if: env.RELEASE_VERSION != 'none'
       shell: bash
       run: |
-        docker image save $BUILD_DOCKER_REGISTRY/niscode-service/NisCodeService:$SEMVER -o ~/ns-NisCodeService-image.tar
+        docker image save $BUILD_DOCKER_REGISTRY/niscode-service/niscodeservice:$SEMVER -o ~/ns-niscodeservice-image.tar
       env:
         BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
         SEMVER: ${{ env.RELEASE_VERSION }}
@@ -150,7 +150,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: NisCodeService
-        path: ~/ns-NisCodeService-image.tar
+        path: ~/ns-niscodeservice-image.tar
 
 
   publish_to_atlassian:
@@ -235,18 +235,25 @@ jobs:
       shell: bash
       run: dotnet --info
 
-    - name: Download NuGet package nis-code-service-.-sync-.-hard-coded
+    - name: Download NuGet package nuget-niscode-service
       if: env.RELEASE_VERSION != 'none'
       uses: actions/download-artifact@v3
       with:
-        name: nuget-nis-code-service-.-sync-.-hard-coded
+        name: nuget-niscode-service
         path: ~/
 
+    - name: Download NuGet package nuget-niscode-service-abstractions
+      if: env.RELEASE_VERSION != 'none'
+      uses: actions/download-artifact@v3
+      with:
+        name: nuget-niscode-service-abstractions
+        path: ~/
 
     - name: Publish packages to NuGet
       shell: bash
       run: |
-        dotnet nuget push ~/NisCodeService.Sync.HardCoded.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
+        dotnet nuget push ~/NisCodeService.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
+        dotnet nuget push ~/NisCodeService.Abstractions.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
       env:
         SEMVER: ${{ needs.build.outputs.version }}
         WORKSPACE: ${{ github.workspace }}
@@ -287,14 +294,14 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-NisCodeService-image.tar
+          docker image load -i ~/ns-niscodeservice-image.tar
 
       - name: Push artifacts to ECR Test
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
           echo $SEMVER
-          docker push $BUILD_DOCKER_REGISTRY/niscode-service/NisCodeService:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscodeservice:$SEMVER
         env:
           BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
           SEMVER: ${{ needs.build.outputs.version }}
@@ -335,14 +342,14 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-NisCodeService-image.tar
+          docker image load -i ~/ns-niscodeservice-image.tar
 
       - name: Push artifacts to ECR Staging
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
-          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/NisCodeService:$SEMVER $BUILD_DOCKER_REGISTRY/niscode-service/NisCodeService:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY/niscode-service/NisCodeService:$SEMVER
+          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscodeservice:$SEMVER $BUILD_DOCKER_REGISTRY/niscode-service/niscodeservice:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscodeservice:$SEMVER
 
         env:
           BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
@@ -385,14 +392,14 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-NisCodeService-image.tar
+          docker image load -i ~/ns-niscodeservice-image.tar
 
       - name: Push artifacts to ECR Production
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
-          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/NisCodeService:$SEMVER $BUILD_DOCKER_REGISTRY_PRD/niscode-service/NisCodeService:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY_PRD/niscode-service/NisCodeService:$SEMVER
+          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscodeservice:$SEMVER $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscodeservice:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscodeservice:$SEMVER
 
         env:
           BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
