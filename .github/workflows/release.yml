@@ -114,7 +114,7 @@ jobs:
       if: env.RELEASE_VERSION != 'none'
       shell: bash
       run: |
-        docker image save $BUILD_DOCKER_REGISTRY/niscode-service/niscodeservice:$SEMVER -o ~/ns-niscodeservice-image.tar
+        docker image save $BUILD_DOCKER_REGISTRY/niscode-service/niscode:$SEMVER -o ~/ns-niscode-image.tar
       env:
         BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
         SEMVER: ${{ env.RELEASE_VERSION }}
@@ -150,7 +150,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: NisCodeService
-        path: ~/ns-niscodeservice-image.tar
+        path: ~/ns-niscode-image.tar
 
 
   publish_to_atlassian:
@@ -294,14 +294,14 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-niscodeservice-image.tar
+          docker image load -i ~/ns-niscode-image.tar
 
       - name: Push artifacts to ECR Test
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
           echo $SEMVER
-          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscodeservice:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscode:$SEMVER
         env:
           BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
           SEMVER: ${{ needs.build.outputs.version }}
@@ -348,8 +348,8 @@ jobs:
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
-          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscodeservice:$SEMVER $BUILD_DOCKER_REGISTRY/niscode-service/niscodeservice:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscodeservice:$SEMVER
+          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscode:$SEMVER $BUILD_DOCKER_REGISTRY/niscode-service/niscode:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscode:$SEMVER
 
         env:
           BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
@@ -398,8 +398,8 @@ jobs:
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
-          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscodeservice:$SEMVER $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscodeservice:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscodeservice:$SEMVER
+          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscode:$SEMVER $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscode:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscode:$SEMVER
 
         env:
           BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
