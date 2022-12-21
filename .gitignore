@@ -348,3 +348,28 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+.vs/
+.vscode/
+.fake/
+.idea/
+.ionide/
+.paket/
+
+[Pp]aket-files/
+[Bb]uild/
+[Xx]64/
+[Dd]ist/
+[Tt]est[Rr]esults/
+
+*.ncrunchproject
+*ncrunchsolution
+_Ncrunch_*
+TestResults.xml
+
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+~$*

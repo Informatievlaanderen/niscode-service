@@ -123,12 +123,21 @@ jobs:
     # Upload NuGet packages
     #
 
-    - name: Upload NuGet package nis-code-service-.-sync-.-hard-coded
+    - name: Upload NuGet package niscode-service
       if: env.RELEASE_VERSION != 'none'
       uses: actions/upload-artifact@v3
       with:
-        name: nuget-nis-code-service-.-sync-.-hard-coded
-        path: /home/runner/work/niscode-service/niscode-service/dist/nuget/NisCodeService.Sync.HardCoded.*.nupkg
+        name: nuget-niscode-service
+        path: /home/runner/work/niscode-service/niscode-service/dist/nuget/NisCodeService.*.nupkg
+      env:
+        SEMVER: ${{ env.RELEASE_VERSION }}
+
+    - name: Upload NuGet package niscode-service-abstractions
+      if: env.RELEASE_VERSION != 'none'
+      uses: actions/upload-artifact@v3
+      with:
+        name: nuget-niscode-service-abstractions
+        path: /home/runner/work/niscode-service/niscode-service/dist/nuget/NisCodeService.Abstractions.*.nupkg
       env:
         SEMVER: ${{ env.RELEASE_VERSION }}
 
@@ -142,7 +151,6 @@ jobs:
       with:
         name: NisCodeService
         path: ~/ns-NisCodeService-image.tar
-
 
 
   publish_to_atlassian:
