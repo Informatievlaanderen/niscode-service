@@ -1,3 +1,12 @@
+## [1.0.8](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.7...v1.0.8) (2023-01-09)
+
+
+### Bug Fixes
+
+* add dotnet restore ?? ([9210012](https://github.com/informatievlaanderen/niscode-service/commit/92100128c7613b167d00588c44928b924740f864))
+* deploy path ([3b611e8](https://github.com/informatievlaanderen/niscode-service/commit/3b611e8e8a1991025eb2efe273896aa4250511dd))
+* dotnet paket install ([4cdb652](https://github.com/informatievlaanderen/niscode-service/commit/4cdb652e0d0079d9a680f423a6c1325068ffd2f4))
+
 ## [1.0.7](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.6...v1.0.7) (2022-12-21)
 
 
