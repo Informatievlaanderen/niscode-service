@@ -6,24 +6,45 @@ using Xunit;
 
 namespace NisCodeService.IntegrationTests
 {
+    using System.Collections.Generic;
+    using System.Net.Http.Json;
+    using Abstractions;
+
     public class NisCodeServiceTests
     {
-        [Theory]
-        [InlineData("OVO002067", "44021")]
-        [InlineData("002007", "13002")]
-        public async Task GetNisCode(string ovoCode, string expectedResult)
+        private readonly WebApplicationFactory<Program> _application;
+
+        public NisCodeServiceTests()
         {
-            var application = new WebApplicationFactory<Program>()
+            _application = new WebApplicationFactory<Program>()
                 .WithWebHostBuilder(builder =>
                 {
                     builder.ConfigureServices(services => services
                         .AddOrganizationRegistryNisCodeReader()
                         .AddNisCodeService());
                 });
+        }
 
-            var client = application.CreateClient();
+        [Theory]
+        [InlineData("OVO002067", "44021")]
+        [InlineData("002007", "13002")]
+        public async Task GetAllNisCodes(string ovoCode, string expectedResult)
+        {
+            var client = _application.CreateClient();
+            var response = await client.GetAsync("/niscode");
+            Assert.True(response.IsSuccessStatusCode);
+            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+            Assert.NotNull(content);
+            Assert.Equal(333, content.Count);
+            Assert.Equal(expectedResult, content[ovoCode.WithoutOvoPrefix()!]);
+        }
 
-            // get
+        [Theory]
+        [InlineData("OVO002067", "44021")]
+        [InlineData("002007", "13002")]
+        public async Task GetNisCode(string ovoCode, string expectedResult)
+        {
+            var client = _application.CreateClient();
             var result = await client.GetStringAsync($"/niscode/{ovoCode}");
             Assert.Equal(expectedResult, result);
         }

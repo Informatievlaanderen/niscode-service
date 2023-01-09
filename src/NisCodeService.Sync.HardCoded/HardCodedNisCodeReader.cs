@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,9 +7,11 @@ using NisCodeService.Abstractions;
 
 namespace NisCodeService.Sync.HardCoded
 {
+    using System.Linq;
+
     public class HardCodedNisCodeReader : INisCodeReader
     {
-        private static readonly IDictionary<string, string> Cache = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> Cache = new Dictionary<string, string>
         {
             ["004095"] = "04000",
             ["000228"] = "10000",
@@ -342,14 +344,14 @@ namespace NisCodeService.Sync.HardCoded
             ["003307"] = "V0050"
         };
 
-        public Task ReadNisCodes(IDictionary<string, string> cache, ILoggerFactory loggerFactory, CancellationToken cancellationToken = default)
+        public Task<Dictionary<string, string>> ReadNisCodes(IDictionary<string, string> cache, ILoggerFactory loggerFactory, CancellationToken cancellationToken = default)
         {
             var logger = loggerFactory.CreateLogger<HardCodedNisCodeReader>();
             logger.LogInformation("Refresh cache: started at {dateTime}", DateTime.UtcNow);
 
             if (cancellationToken.IsCancellationRequested)
             {
-                return Task.CompletedTask;
+                return Task.FromResult(new Dictionary<string, string>());
             }
 
             cache.Clear();
@@ -359,7 +361,7 @@ namespace NisCodeService.Sync.HardCoded
             }
 
             logger.LogInformation("Refresh cache: ended at {dateTime}", DateTime.UtcNow);
-            return Task.CompletedTask;
+            return Task.FromResult(cache.ToDictionary(x => x.Key, x => x.Value));
         }
     }
 }

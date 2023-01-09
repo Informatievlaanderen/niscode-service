@@ -61,6 +61,8 @@ app
     .UseAuthorization();
 
 // map endpoints
+app.MapGet("niscode", Handlers.GetAll)
+    .Produces<string?>(contentType: MediaTypeNames.Application.Json);
 app.MapGet("niscode/{ovocode}", Handlers.Get)
     .Produces<string?>(contentType: MediaTypeNames.Application.Json);
 
