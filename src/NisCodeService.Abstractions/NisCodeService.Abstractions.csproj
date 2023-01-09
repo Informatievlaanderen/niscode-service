@@ -12,7 +12,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Content Include="paket.template" CopyToOutputDirectory="Never" />
+    <Content Include="paket.template" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
 </Project>
