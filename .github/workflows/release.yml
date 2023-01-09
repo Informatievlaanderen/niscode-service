@@ -438,7 +438,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        services: ['NisCodeService']
+        services: ['microservices-niscode']
 
     steps:
     - name: Deploy services
@@ -514,7 +514,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        services: ['NisCodeService']
+        services: ['microservices-niscode']
 
     steps:
     - name: CD services
@@ -590,7 +590,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix: 
-        services: ['NisCodeService']
+        services: ['microservices-niscode']
 
     steps:
     - name: CD services
