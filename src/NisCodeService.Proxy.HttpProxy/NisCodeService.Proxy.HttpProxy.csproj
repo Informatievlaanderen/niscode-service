@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <Content Include="paket.template">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
