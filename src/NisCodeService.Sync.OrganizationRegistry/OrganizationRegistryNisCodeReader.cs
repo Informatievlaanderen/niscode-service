@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -21,7 +21,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
             _factory = factory;
         }
 
-        public async Task ReadNisCodes(IDictionary<string, string> cache, ILoggerFactory loggerFactory, CancellationToken cancellationToken = default)
+        public async Task<Dictionary<string, string>> ReadNisCodes(IDictionary<string, string> cache, ILoggerFactory loggerFactory, CancellationToken cancellationToken = default)
         {
             var logger = loggerFactory.CreateLogger<OrganizationRegistryNisCodeReader>();
             logger.LogInformation("Refresh cache: started at {dateTime}", DateTime.UtcNow);
@@ -61,6 +61,8 @@ namespace NisCodeService.Sync.OrganizationRegistry
             }
 
             logger.LogInformation("Refresh cache: ended at {dateTime}", DateTime.UtcNow);
+
+            return cache.ToDictionary(x => x.Key, x => x.Value);
         }
 
         private async Task InternalReadNisCodes(HttpResponseMessage response, IDictionary<string, string> cache, CancellationToken cancellationToken)
@@ -108,8 +110,9 @@ namespace NisCodeService.Sync.OrganizationRegistry
             ArgumentNullException.ThrowIfNull(organization);
             ArgumentNullException.ThrowIfNull(organization.Keys);
 
-            var firstNisCode = organization.Keys.FirstOrDefault(x =>
-                x.KeyTypeName.Equals("NIS", StringComparison.InvariantCultureIgnoreCase));
+            var firstNisCode = organization.Keys
+                .Where(x => x.KeyTypeName is not null)
+                .FirstOrDefault(x => x.KeyTypeName!.Equals("NIS", StringComparison.InvariantCultureIgnoreCase));
 
             var result = firstNisCode?.Value;
             return result;

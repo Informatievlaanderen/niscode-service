@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,8 @@ namespace NisCodeService
             _reader = readerFactory.CreateReader(services);
             _loggerFactory = services.GetRequiredService<ILoggerFactory>();
         }
+
+        public async Task<Dictionary<string, string>> GetAll(CancellationToken cancellationToken = default) => await _reader.ReadNisCodes(Cache, _loggerFactory, cancellationToken);
 
         public async Task<string?> Get(string? ovoCode, CancellationToken cancellationToken = default)
         {
