@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.9...v1.0.10) (2023-01-10)
+
+
+### Bug Fixes
+
+* add HttpProxy to release.yml ([cf725f2](https://github.com/informatievlaanderen/niscode-service/commit/cf725f26334d6b80f24800ece913a46ff6d1c266))
+
 ## [1.0.9](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.8...v1.0.9) (2023-01-10)
 
 
