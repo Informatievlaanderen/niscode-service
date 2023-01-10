@@ -1,3 +1,12 @@
+## [1.0.9](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.8...v1.0.9) (2023-01-10)
+
+
+### Bug Fixes
+
+* add get-all endpoint ([f034ea1](https://github.com/informatievlaanderen/niscode-service/commit/f034ea16cf3941527a8e32e4e545da67b875269d))
+* add http proxy ([32ee246](https://github.com/informatievlaanderen/niscode-service/commit/32ee246528d169041b3430f35e7e75ef3c0c1d23))
+* always copy paket.template ([7dad58d](https://github.com/informatievlaanderen/niscode-service/commit/7dad58d95fe7b74221de3b4c0a3fa00031d67265))
+
 ## [1.0.8](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.7...v1.0.8) (2023-01-09)
 
 
