@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.10...v1.0.11) (2023-01-13)
+
+
+### Bug Fixes
+
+* disable http proxy when url is empty ([e002ad1](https://github.com/informatievlaanderen/niscode-service/commit/e002ad1264ecf1924a9026c635924fd834892bd8))
+
 ## [1.0.10](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.9...v1.0.10) (2023-01-10)
 
 
