@@ -10,10 +10,13 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         string baseUrl)
     {
-        services.AddHttpClient<INisCodeService, HttpProxyNisCodeService>(c =>
+        if (!string.IsNullOrWhiteSpace(baseUrl))
         {
-            c.BaseAddress = new Uri(baseUrl.TrimEnd('/'));
-        });
+            services.AddHttpClient<INisCodeService, HttpProxyNisCodeService>(c =>
+            {
+                c.BaseAddress = new Uri(baseUrl.TrimEnd('/'));
+            });
+        }
 
         return services;
     }
