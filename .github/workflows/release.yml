@@ -277,6 +277,45 @@ jobs:
         SEMVER: ${{ needs.build.outputs.version }}
         WORKSPACE: ${{ github.workspace }}
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        
+  push_images_to_github:
+    if: needs.build.outputs.version != 'none'
+    needs: build
+    name: Push images to Github
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:    
+      - name: Log in to the Container registry
+        uses: docker/login-action@2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Download artifacts
+      - name: Download NisCodeService
+        uses: actions/download-artifact@v3
+        with:
+          name: NisCodeService
+          path: ~/
+
+      # Load artifacts
+      - name: Load artifacts
+        shell: bash
+        run: |
+          docker image load -i ~/ns-niscode-image.tar
+
+      - name: Push artifacts to ECR Test
+        if: needs.build.outputs.version != 'none'
+        shell: bash
+        run: |
+          echo $SEMVER
+          docker push ghcr.io/niscode-service/niscode:$SEMVER
+        env:          
+          SEMVER: ${{ needs.build.outputs.version }}
+          WORKSPACE: ${{ github.workspace }}
 
   push_images_to_test:
     if: needs.build.outputs.version != 'none'
