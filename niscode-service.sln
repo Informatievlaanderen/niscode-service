@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.fsx = build.fsx
 		build.sh = build.sh
 		Directory.Build.props = Directory.Build.props
+		docker-compose.yml = docker-compose.yml
 		global.json = global.json
 		paket.dependencies = paket.dependencies
 		README.md = README.md
@@ -33,9 +34,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.HardCoded.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Sync.OrganizationRegistry.Tests", "test\NisCodeService.Sync.OrganizationRegistry.Tests\NisCodeService.Sync.OrganizationRegistry.Tests.csproj", "{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NisCodeService.Proxy.HttpProxy", "src\NisCodeService.Proxy.HttpProxy\NisCodeService.Proxy.HttpProxy.csproj", "{9118ABC5-C7D1-44A9-8039-FA5C254980D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Proxy.HttpProxy", "src\NisCodeService.Proxy.HttpProxy\NisCodeService.Proxy.HttpProxy.csproj", "{9118ABC5-C7D1-44A9-8039-FA5C254980D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NisCodeService.Proxy.HttpProxy.Tests", "test\NisCodeService.Proxy.HttpProxy.Tests\NisCodeService.Proxy.HttpProxy.Tests.csproj", "{24F124EE-6907-44E8-B177-F5C9A682F120}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Proxy.HttpProxy.Tests", "test\NisCodeService.Proxy.HttpProxy.Tests\NisCodeService.Proxy.HttpProxy.Tests.csproj", "{24F124EE-6907-44E8-B177-F5C9A682F120}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

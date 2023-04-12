@@ -2,9 +2,12 @@ framework: net6.0
 strategy: min
 source https://api.nuget.org/v3/index.json
 
+nuget AWSSDK.DynamoDBv2 3.7.102.15
+
 // VBR STUFF
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
 nuget Be.Vlaanderen.Basisregisters.Api 20.0.0
+nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
 
 // PRODUCTION STUFF
 nuget Microsoft.AspNetCore.Authentication.JwtBearer 6.0.12

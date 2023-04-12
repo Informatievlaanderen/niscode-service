@@ -8,6 +8,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.5.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
     <PackageReference Include="xunit" Version="2.4.2" />
@@ -20,6 +21,17 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj" />
     <ProjectReference Include="..\..\src\NisCodeService.Sync.OrganizationRegistry\NisCodeService.Sync.OrganizationRegistry.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="dynamodb.yml" />
+    <Content Include="dynamodb.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -1,5 +1,7 @@
 Be.Vlaanderen.Basisregisters.Api
 
+AWSSDK.DynamoDBv2
+
 Microsoft.Extensions.DependencyInjection.Abstractions
 Microsoft.Extensions.Http
 Microsoft.Extensions.Hosting

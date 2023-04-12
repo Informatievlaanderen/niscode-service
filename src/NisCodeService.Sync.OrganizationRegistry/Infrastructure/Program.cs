@@ -1,9 +1,13 @@
-﻿namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
+namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
 {
     using System;
     using System.IO;
     using System.Threading.Tasks;
+    using Amazon;
+    using Amazon.DynamoDBv2;
+    using Amazon.Runtime;
     using Destructurama;
+    using Extensions;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -12,33 +16,18 @@
     using Serilog.Debugging;
     using Serilog.Extensions.Logging;
 
-    public sealed class Program
+    public static class HostBuilderExtensions
     {
-        private Program() {}
-
-        public static async Task Main(string[] args)
+        public static IHostBuilder ConfigureHostBuilder(this IHostBuilder builder)
         {
-            AppDomain.CurrentDomain.FirstChanceException += (sender, eventArgs) =>
-                Log.Debug(
-                    eventArgs.Exception,
-                    "FirstChanceException event raised in {AppDomain}.",
-                    AppDomain.CurrentDomain.FriendlyName);
-
-            AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
-                Log.Fatal((Exception)eventArgs.ExceptionObject, "Encountered a fatal exception, exiting program.");
-
-            Log.Information("Starting Organization Sync Process");
-
-            var host = new HostBuilder()
-                .ConfigureAppConfiguration((hostContext, builder) =>
+            return builder.ConfigureAppConfiguration((hostContext, builder) =>
                 {
                     builder
                         .SetBasePath(Directory.GetCurrentDirectory())
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
                         .AddJsonFile($"appsettings.{Environment.MachineName.ToLowerInvariant()}.json", optional: true,
                             reloadOnChange: false)
-                        .AddEnvironmentVariables()
-                        .AddCommandLine(args);
+                        .AddEnvironmentVariables();
                 })
                 .ConfigureLogging((hostContext, builder) =>
                 {
@@ -60,8 +49,40 @@
                 {
                     var loggerFactory = new SerilogLoggerFactory(Log.Logger);
 
+                    services.AddOrganizationRegistryNisCodeReader();
                     services.AddHostedService<OrganizationRegistrySync>();
-                })
+
+                    services.Configure<ServiceOptions>(hostContext.Configuration);
+
+                    var awsCredentials = new BasicAWSCredentials("key", "secret");
+                    services.AddSingleton<IAmazonDynamoDB>(new AmazonDynamoDBClient(awsCredentials,
+                        RegionEndpoint.GetBySystemName("local")));
+
+                    services.AddSingleton<IKeyValuePairStorage, DynamoDbNisCodeStorage>();
+                });
+        }
+    }
+
+    public sealed class Program
+    {
+        private Program() {}
+
+        public static async Task Main(string[] args)
+        {
+            try{
+            AppDomain.CurrentDomain.FirstChanceException += (sender, eventArgs) =>
+                Log.Debug(
+                    eventArgs.Exception,
+                    "FirstChanceException event raised in {AppDomain}.",
+                    AppDomain.CurrentDomain.FriendlyName);
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
+                Log.Fatal((Exception)eventArgs.ExceptionObject, "Encountered a fatal exception, exiting program.");
+
+            Log.Information("Starting Organization Sync Process");
+
+            var host = new HostBuilder()
+                .ConfigureHostBuilder()
                 .UseConsoleLifetime()
                 .Build();
 
@@ -69,13 +90,13 @@
             var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
-            try
-            {
+            // try
+            // {
                 await host.RunAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
-                logger.LogCritical(e, "Encountered a fatal exception, exiting program.");
+                // logger.LogCritical(e, "Encountered a fatal exception, exiting program.");
                 Log.CloseAndFlush();
 
                 // Allow some time for flushing before shutdown.
@@ -84,7 +105,7 @@
             }
             finally
             {
-                logger.LogInformation("Stopping...");
+                // logger.LogInformation("Stopping...");
             }
         }
     }
