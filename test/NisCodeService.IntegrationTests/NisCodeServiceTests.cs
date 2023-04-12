@@ -1,28 +1,35 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Testing;
-using NisCodeService.Extensions;
-using NisCodeService.Sync.OrganizationRegistry.Extensions;
-using Xunit;
-
 namespace NisCodeService.IntegrationTests
 {
     using System.Collections.Generic;
     using System.Net.Http.Json;
+    using System.Threading.Tasks;
     using Abstractions;
+    using Extensions;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.TestHost;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.VisualStudio.TestPlatform.TestHost;
+    using Sync.OrganizationRegistry.Extensions;
+    using Xunit;
 
     public class NisCodeServiceTests
     {
-        private readonly WebApplicationFactory<Program> _application;
+        private readonly TestServer _testServer;
 
         public NisCodeServiceTests()
         {
-            _application = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder =>
+            var hostBuilder = new WebHostBuilder()
+                .ConfigureServices(serviceCollection =>
                 {
-                    builder.ConfigureServices(services => services
+                    serviceCollection
                         .AddOrganizationRegistryNisCodeReader()
-                        .AddNisCodeService());
-                });
+                        .AddNisCodeService();
+                })
+                .UseStartup<Program>()
+                .ConfigureLogging(loggingBuilder => loggingBuilder.AddConsole())
+                .UseTestServer();
+
+            _testServer = new TestServer(hostBuilder);
         }
 
         [Theory]
@@ -30,7 +37,7 @@ namespace NisCodeService.IntegrationTests
         [InlineData("002007", "13002")]
         public async Task GetAllNisCodes(string ovoCode, string expectedResult)
         {
-            var client = _application.CreateClient();
+            var client = _testServer.CreateClient();
             var response = await client.GetAsync("/niscode");
             Assert.True(response.IsSuccessStatusCode);
             var content = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
@@ -44,7 +51,7 @@ namespace NisCodeService.IntegrationTests
         [InlineData("002007", "13002")]
         public async Task GetNisCode(string ovoCode, string expectedResult)
         {
-            var client = _application.CreateClient();
+            var client = _testServer.CreateClient();
             var result = await client.GetStringAsync($"/niscode/{ovoCode}");
             Assert.Equal(expectedResult, result);
         }

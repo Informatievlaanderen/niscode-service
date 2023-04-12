@@ -1,0 +1,6 @@
+Microsoft.Extensions.Logging.Abstractions
+Microsoft.AspNetCore.Mvc.Testing
+Microsoft.AspNetCore.TestHost
+Microsoft.NET.Test.Sdk
+xunit.runner.visualstudio
+xunit

@@ -4,19 +4,21 @@ source https://api.nuget.org/v3/index.json
 
 // VBR STUFF
 nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
+nuget Be.Vlaanderen.Basisregisters.Api 20.0.0
 
 // PRODUCTION STUFF
 nuget Microsoft.AspNetCore.Authentication.JwtBearer 6.0.12
-nuget Swashbuckle.AspNetCore.Swagger 6.4.0
-nuget Swashbuckle.AspNetCore.SwaggerGen 6.4.0
-nuget Swashbuckle.AspNetCore.SwaggerUI 6.4.0
-nuget Microsoft.Extensions.DependencyInjection.Abstractions 6.0.0
-nuget Microsoft.Extensions.Http 6.0.0
-nuget Microsoft.Extensions.Logging.Abstractions 6.0.3
+nuget Microsoft.Extensions.DependencyInjection.Abstractions 7.0.0
+nuget Microsoft.Extensions.Http 7.0.0
+nuget Microsoft.Extensions.Hosting 7.0.1
+nuget Microsoft.Extensions.Logging.Abstractions 7.0.0
 nuget Newtonsoft.Json 13.0.2
 
 // TEST STUFF
-nuget Microsoft.AspNetCore.Mvc.Testing 6.0.12
+nuget Moq 4.18.4
+nuget FluentAssertions 6.8.0
+nuget Microsoft.AspNetCore.Mvc.Testing 6.0.16
+nuget Microsoft.AspNetCore.TestHost 6.0.16
 nuget Microsoft.NET.Test.Sdk 17.4.1
 nuget xunit 2.4.2
 nuget xunit.runner.visualstudio 2.4.5
@@ -24,3 +26,13 @@ nuget xunit.runner.visualstudio 2.4.5
 // BUILD STUFF
 nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true
 nuget SourceLink.Copy.PdbFiles 2.8.3 copy_local: true
+
+
+nuget Serilog
+nuget Serilog.Settings.Configuration
+nuget Serilog.Extensions.Logging
+nuget Serilog.Sinks.Console
+nuget Serilog.Sinks.File
+nuget Serilog.Enrichers.Thread
+nuget Serilog.Enrichers.Environment
+nuget Serilog.Formatting.Compact
