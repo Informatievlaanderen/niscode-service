@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/informatievlaanderen/niscode-service/compare/v1.1.0...v1.1.1) (2023-04-14)
+
+
+### Bug Fixes
+
+* localdev + save artifact in release pipeline ([cb49f5d](https://github.com/informatievlaanderen/niscode-service/commit/cb49f5dd7be391310b879ca0713ff4987e31d02b))
+
 # [1.1.0](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.12...v1.1.0) (2023-04-14)
 
 
