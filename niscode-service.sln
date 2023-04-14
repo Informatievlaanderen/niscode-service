@@ -25,11 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9CB3983B-F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{155FF959-48BC-4039-8DA4-374E6CF7E492}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Sync.HardCoded", "src\NisCodeService.Sync.HardCoded\NisCodeService.Sync.HardCoded.csproj", "{7240985F-1D5C-4904-B69C-D82BEE66A2D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.HardCoded", "src\NisCodeService.HardCoded\NisCodeService.HardCoded.csproj", "{7240985F-1D5C-4904-B69C-D82BEE66A2D4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Sync.OrganizationRegistry", "src\NisCodeService.Sync.OrganizationRegistry\NisCodeService.Sync.OrganizationRegistry.csproj", "{ACBA827F-8F0D-4448-9421-4778BFD27C9C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Sync.HardCoded.Tests", "test\NisCodeService.Sync.HardCoded.Tests\NisCodeService.Sync.HardCoded.Tests.csproj", "{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.HardCoded.Tests", "test\NisCodeService.HardCoded.Tests\NisCodeService.HardCoded.Tests.csproj", "{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Sync.OrganizationRegistry.Tests", "test\NisCodeService.Sync.OrganizationRegistry.Tests\NisCodeService.Sync.OrganizationRegistry.Tests.csproj", "{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089}"
 EndProject

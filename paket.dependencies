@@ -1,5 +1,5 @@
 framework: net6.0
-
+strategy: min
 source https://api.nuget.org/v3/index.json
 
 // VBR STUFF

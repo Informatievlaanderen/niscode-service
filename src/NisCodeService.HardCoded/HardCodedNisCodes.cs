@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using NisCodeService.Abstractions;
-
-namespace NisCodeService.Sync.HardCoded
+namespace NisCodeService.HardCoded
 {
-    using System.Linq;
+    using System.Collections.Generic;
 
-    public class HardCodedNisCodeReader : INisCodeReader
+    public static class HardCodedNisCodes
     {
-        private static readonly Dictionary<string, string> Cache = new Dictionary<string, string>
+        internal static readonly Dictionary<string, string> NisCodesByOvoCode = new Dictionary<string, string>
         {
             ["004095"] = "04000",
             ["000228"] = "10000",
@@ -343,25 +336,5 @@ namespace NisCodeService.Sync.HardCoded
             ["000571"] = "V0014",
             ["003307"] = "V0050"
         };
-
-        public Task<Dictionary<string, string>> ReadNisCodes(IDictionary<string, string> cache, ILoggerFactory loggerFactory, CancellationToken cancellationToken = default)
-        {
-            var logger = loggerFactory.CreateLogger<HardCodedNisCodeReader>();
-            logger.LogInformation("Refresh cache: started at {dateTime}", DateTime.UtcNow);
-
-            if (cancellationToken.IsCancellationRequested)
-            {
-                return Task.FromResult(new Dictionary<string, string>());
-            }
-
-            cache.Clear();
-            foreach (var item in Cache)
-            {
-                cache.Add(item.Key, item.Value);
-            }
-
-            logger.LogInformation("Refresh cache: ended at {dateTime}", DateTime.UtcNow);
-            return Task.FromResult(cache.ToDictionary(x => x.Key, x => x.Value));
-        }
     }
 }
