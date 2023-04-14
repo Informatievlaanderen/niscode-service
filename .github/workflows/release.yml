@@ -114,7 +114,7 @@ jobs:
       if: env.RELEASE_VERSION != 'none'
       shell: bash
       run: |
-        docker image save $BUILD_DOCKER_REGISTRY/niscode-organization-sync/niscode:$SEMVER -o ~/ns-niscode-organization-sync-image.tar
+        docker image save $BUILD_DOCKER_REGISTRY/niscode-service/niscode-organization-sync:$SEMVER -o ~/ns-niscode-organization-sync-image.tar
       env:
         BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
         SEMVER: ${{ env.RELEASE_VERSION }}

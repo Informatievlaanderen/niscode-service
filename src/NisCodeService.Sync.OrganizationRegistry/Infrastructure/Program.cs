@@ -21,16 +21,16 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
     {
         public static IHostBuilder ConfigureHostBuilder(this IHostBuilder builder)
         {
-            return builder.ConfigureAppConfiguration((hostContext, builder) =>
+            return builder.ConfigureAppConfiguration((hostContext, config) =>
                 {
-                    builder
+                    config
                         .SetBasePath(Directory.GetCurrentDirectory())
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
                         .AddJsonFile($"appsettings.{Environment.MachineName.ToLowerInvariant()}.json", optional: true,
                             reloadOnChange: false)
                         .AddEnvironmentVariables();
                 })
-                .ConfigureLogging((hostContext, builder) =>
+                .ConfigureLogging((hostContext, loggingBuilder) =>
                 {
                     SelfLog.Enable(Console.WriteLine);
 
@@ -42,8 +42,8 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
                         .Enrich.WithEnvironmentUserName()
                         .CreateLogger();
 
-                    builder.ClearProviders();
-                    builder.AddSerilog(Log.Logger);
+                    loggingBuilder.ClearProviders();
+                    loggingBuilder.AddSerilog(Log.Logger);
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
@@ -54,16 +54,18 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
 
                     services.Configure<ServiceOptions>(hostContext.Configuration);
 
-                    var awsCredentials = new BasicAWSCredentials("key", "secret");
-                    // services.AddSingleton<IAmazonDynamoDB>(new AmazonDynamoDBClient(awsCredentials,
-                    //     RegionEndpoint.GetBySystemName("local")));
-
-                    services.AddSingleton<IAmazonDynamoDB>(new AmazonDynamoDBClient(RegionEndpoint.EUWest1));
-                    // services.AddSingleton<IAmazonDynamoDB>(sp =>
+                    // if (hostContext.Configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
                     // {
-                    //     var clientConfig = new AmazonDynamoDBConfig { ServiceURL = "http://localhost:8000" };
-                    //     return new AmazonDynamoDBClient(clientConfig);
-                    // });
+                    //     services.AddSingleton<IAmazonDynamoDB>(sp =>
+                    //     {
+                    //         var clientConfig = new AmazonDynamoDBConfig { ServiceURL = "http://localhost:8000" };
+                    //         return new AmazonDynamoDBClient(clientConfig);
+                    //     });
+                    // }
+                    // else
+                    // {
+                        services.AddSingleton<IAmazonDynamoDB, AmazonDynamoDBClient>();
+                    // }
                     services.AddSingleton<IKeyValuePairStorage, DynamoDbNisCodeStorage>();
                 });
         }
@@ -71,10 +73,6 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
 
     public sealed class Program
     {
-        private Program()
-        {
-        }
-
         public static async Task Main(string[] args)
         {
             try
