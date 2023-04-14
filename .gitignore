@@ -373,3 +373,5 @@ Icon?
 Thumbs.db
 
 ~$*
+
+appsettings.*.json

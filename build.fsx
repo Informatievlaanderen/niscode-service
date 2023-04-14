@@ -48,20 +48,17 @@ Target.create "Test_Solution" (fun _ -> testSolution "niscode-service")
 
 Target.create "Publish_Solution" (fun _ ->
   [
-    "NisCodeService"
-    "NisCodeService.Abstractions"
-    "NisCodeService.Proxy.HttpProxy"
+    "NisCodeService.Abstractions",
+    "NisCodeService.Sync.OrganizationRegistry"
   ] |> List.iter publishSource)
 
 Target.create "Pack_Solution" (fun _ ->
   [
-    "NisCodeService"
     "NisCodeService.Abstractions"
-    "NisCodeService.Proxy.HttpProxy"
   ] |> List.iter pack)
 
-Target.create "Containerize_NisCodeService" (fun _ -> containerize "NisCodeService" "niscode")
-Target.create "PushContainer_NisCodeService" (fun _ -> push "niscode")
+Target.create "Containerize_NisCodeOrganizationSync" (fun _ -> containerize "NisCodeService.Sync.OrganizationRegistry" "niscode-organization-sync")
+Target.create "PushContainer_NisCodeOrganizationSync" (fun _ -> push "niscode-organization-sync")
 
 // --------------------------------------------------------------------------------
 
@@ -92,13 +89,13 @@ Target.create "Push" ignore
   ==> "Pack"
 
 "Pack"
-  ==> "Containerize_NisCodeService"
+  ==> "Containerize_NisCodeOrganizationSync"
   ==> "Containerize"
 // Possibly add more projects to containerize here
 
 "Containerize"
   ==> "DockerLogin"
-  ==> "PushContainer_NisCodeService"
+  ==> "PushContainer_NisCodeOrganizationSync"
   ==> "Push"
 // Possibly add more projects to push here
 

@@ -1,15 +1,27 @@
-﻿using System;
-using System.Net.Http;
-using Microsoft.Extensions.DependencyInjection;
-using NisCodeService.Abstractions;
-
 namespace NisCodeService.Sync.OrganizationRegistry
 {
-    public class OrganizationRegistryNisCodeReaderFactory : INisCodeReaderFactory 
+    using System.Net.Http;
+    using Abstractions;
+    using Infrastructure;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
+
+    public class OrganizationRegistryNisCodeReaderFactory : INisCodeReaderFactory
     {
-        public INisCodeReader CreateReader(IServiceProvider services)
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IOptions<ServiceOptions> _serviceOptions;
+        private readonly ILoggerFactory _loggerFactory;
+
+        public OrganizationRegistryNisCodeReaderFactory(IHttpClientFactory httpClientFactory, IOptions<ServiceOptions> serviceOptions, ILoggerFactory loggerFactory)
         {
-            return new OrganizationRegistryNisCodeReader(services.GetRequiredService<IHttpClientFactory>());
+            _httpClientFactory = httpClientFactory;
+            _serviceOptions = serviceOptions;
+            _loggerFactory = loggerFactory;
+        }
+
+        public INisCodeReader CreateReader()
+        {
+            return new OrganizationRegistryNisCodeReader(_httpClientFactory, _serviceOptions, _loggerFactory);
         }
     }
 }
