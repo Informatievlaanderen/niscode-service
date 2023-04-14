@@ -48,7 +48,7 @@ Target.create "Test_Solution" (fun _ -> testSolution "niscode-service")
 
 Target.create "Publish_Solution" (fun _ ->
   [
-    "NisCodeService.Abstractions",
+    "NisCodeService.Abstractions"
     "NisCodeService.Sync.OrganizationRegistry"
   ] |> List.iter publishSource)
 
