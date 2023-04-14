@@ -5,8 +5,9 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
     using System.Threading.Tasks;
     using Amazon;
     using Amazon.DynamoDBv2;
+    using Amazon.Internal;
     using Amazon.Runtime;
-    using Destructurama;
+    using Be.Vlaanderen.Basisregisters.Aws.DistributedMutex;
     using Extensions;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -39,7 +40,6 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
                         .Enrich.WithMachineName()
                         .Enrich.WithThreadId()
                         .Enrich.WithEnvironmentUserName()
-                        .Destructure.JsonNetTypes()
                         .CreateLogger();
 
                     builder.ClearProviders();
@@ -55,9 +55,15 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
                     services.Configure<ServiceOptions>(hostContext.Configuration);
 
                     var awsCredentials = new BasicAWSCredentials("key", "secret");
-                    services.AddSingleton<IAmazonDynamoDB>(new AmazonDynamoDBClient(awsCredentials,
-                        RegionEndpoint.GetBySystemName("local")));
+                    // services.AddSingleton<IAmazonDynamoDB>(new AmazonDynamoDBClient(awsCredentials,
+                    //     RegionEndpoint.GetBySystemName("local")));
 
+                    services.AddSingleton<IAmazonDynamoDB>(new AmazonDynamoDBClient(RegionEndpoint.EUWest1));
+                    // services.AddSingleton<IAmazonDynamoDB>(sp =>
+                    // {
+                    //     var clientConfig = new AmazonDynamoDBConfig { ServiceURL = "http://localhost:8000" };
+                    //     return new AmazonDynamoDBClient(clientConfig);
+                    // });
                     services.AddSingleton<IKeyValuePairStorage, DynamoDbNisCodeStorage>();
                 });
         }
@@ -65,34 +71,43 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
 
     public sealed class Program
     {
-        private Program() {}
+        private Program()
+        {
+        }
 
         public static async Task Main(string[] args)
         {
-            try{
-            AppDomain.CurrentDomain.FirstChanceException += (sender, eventArgs) =>
-                Log.Debug(
-                    eventArgs.Exception,
-                    "FirstChanceException event raised in {AppDomain}.",
-                    AppDomain.CurrentDomain.FriendlyName);
+            try
+            {
+                AppDomain.CurrentDomain.FirstChanceException += (sender, eventArgs) =>
+                    Log.Debug(
+                        eventArgs.Exception,
+                        "FirstChanceException event raised in {AppDomain}.",
+                        AppDomain.CurrentDomain.FriendlyName);
 
-            AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
-                Log.Fatal((Exception)eventArgs.ExceptionObject, "Encountered a fatal exception, exiting program.");
+                AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
+                    Log.Fatal((Exception) eventArgs.ExceptionObject, "Encountered a fatal exception, exiting program.");
 
-            Log.Information("Starting Organization Sync Process");
+                Log.Information("Starting Organization Sync Process");
 
-            var host = new HostBuilder()
-                .ConfigureHostBuilder()
-                .UseConsoleLifetime()
-                .Build();
+                var host = new HostBuilder()
+                    .ConfigureHostBuilder()
+                    .UseConsoleLifetime()
+                    .Build();
 
-            var logger = host.Services.GetRequiredService<ILogger<Program>>();
-            var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
-            var configuration = host.Services.GetRequiredService<IConfiguration>();
+                var logger = host.Services.GetRequiredService<ILogger<Program>>();
+                var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
+                var configuration = host.Services.GetRequiredService<IConfiguration>();
 
-            // try
-            // {
-                await host.RunAsync().ConfigureAwait(false);
+
+                await DistributedLock<Program>.RunAsync(
+                        async () =>
+                        {
+                            await host.RunAsync().ConfigureAwait(false);
+                        },
+                        DistributedLockOptions.LoadFromConfiguration(configuration),
+                        logger)
+                    .ConfigureAwait(false);
             }
             catch (Exception e)
             {

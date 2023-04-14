@@ -1,4 +1,4 @@
-Be.Vlaanderen.Basisregisters.Api
+Be.Vlaanderen.Basisregisters.Aws.DistributedMutex
 
 AWSSDK.DynamoDBv2
 

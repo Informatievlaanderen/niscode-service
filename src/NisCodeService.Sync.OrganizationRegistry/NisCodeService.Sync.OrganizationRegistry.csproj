@@ -9,9 +9,10 @@
     <ProjectReference Include="..\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="Dockerfile" CopyToOutputDirectory="Always" />
+    <Content Include="appsettings.json" CopyToOutputDirectory="Always" />
+    <Content Include="appsettings.*.json" CopyToOutputDirectory="Always" />
+    <Content Include="init.sh" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -1,5 +1,0 @@
-Microsoft.AspNetCore.Authentication.JwtBearer
-Microsoft.Extensions.Logging.Abstractions
-Swashbuckle.AspNetCore.Swagger
-Swashbuckle.AspNetCore.SwaggerGen
-Swashbuckle.AspNetCore.SwaggerUI

@@ -1,14 +1,11 @@
 namespace NisCodeService.Sync.OrganizationRegistry.Tests
 {
-    using System;
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
     using Abstractions;
-    using Extensions;
     using Infrastructure;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging.Abstractions;
     using Microsoft.Extensions.Options;
     using Xunit;
@@ -26,7 +23,7 @@ namespace NisCodeService.Sync.OrganizationRegistry.Tests
             serviceCollection.AddHttpClient();
             var services = serviceCollection.BuildServiceProvider();
 
-            IOptions<ServiceOptions> options = Options.Create<ServiceOptions>(new ServiceOptions()
+            IOptions<ServiceOptions> options = Options.Create(new ServiceOptions()
             {
                 OrganizationRegistrySyncUrl = "https://api.wegwijs.vlaanderen.be/v1/search/organisations"
             });

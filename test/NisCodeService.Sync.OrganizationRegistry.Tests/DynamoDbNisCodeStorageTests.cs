@@ -20,7 +20,7 @@
         [Fact]
         public async Task DoesPersistKvps()
         {
-            using var _ = DockerComposer.Compose("dynamodb.yml", "dynamodb");
+            using var _ = DockerComposer.Compose("dynamodb.yml", "niscode-sync-integration-dynamo-test");
 
             string tableName = "integrationtest";
             var dynamoDb = new AmazonDynamoDBClient(new BasicAWSCredentials("key", "secret"), RegionEndpoint.GetBySystemName("local"));

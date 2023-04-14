@@ -114,7 +114,7 @@ jobs:
       if: env.RELEASE_VERSION != 'none'
       shell: bash
       run: |
-        docker image save $BUILD_DOCKER_REGISTRY/niscode-service/niscode:$SEMVER -o ~/ns-niscode-image.tar
+        docker image save $BUILD_DOCKER_REGISTRY/niscode-organization-sync/niscode:$SEMVER -o ~/ns-niscode-organization-sync-image.tar
       env:
         BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
         SEMVER: ${{ env.RELEASE_VERSION }}
@@ -122,15 +122,6 @@ jobs:
     #
     # Upload NuGet packages
     #
-
-    - name: Upload NuGet package niscode-service
-      if: env.RELEASE_VERSION != 'none'
-      uses: actions/upload-artifact@v3
-      with:
-        name: nuget-niscode-service
-        path: /home/runner/work/niscode-service/niscode-service/dist/nuget/Be.Vlaanderen.Basisregisters.NisCodeService.*.nupkg
-      env:
-        SEMVER: ${{ env.RELEASE_VERSION }}
 
     - name: Upload NuGet package niscode-service-abstractions
       if: env.RELEASE_VERSION != 'none'
@@ -141,25 +132,17 @@ jobs:
       env:
         SEMVER: ${{ env.RELEASE_VERSION }}
 
-    - name: Upload NuGet package niscode-proxy-httpproxy
-      if: env.RELEASE_VERSION != 'none'
-      uses: actions/upload-artifact@v3
-      with:
-        name: nuget-niscode-service-proxy-httpproxy
-        path: /home/runner/work/niscode-service/niscode-service/dist/nuget/Be.Vlaanderen.Basisregisters.NisCodeService.Proxy.HttpProxy.*.nupkg
-      env:
-        SEMVER: ${{ env.RELEASE_VERSION }}
 
     #
     # Upload build artifacts
     #
 
-    - name: Upload NisCodeService artifact
+    - name: Upload "NisCodeOrganizationSync" artifact
       if: env.RELEASE_VERSION != 'none'
       uses: actions/upload-artifact@v3
       with:
-        name: NisCodeService
-        path: ~/ns-niscode-image.tar
+        name: NisCodeOrganizationSync
+        path: ~/ns-niscode-organization-sync-image.tar
 
 
   publish_to_atlassian:
@@ -246,13 +229,6 @@ jobs:
       shell: bash
       run: dotnet --info
 
-    - name: Download NuGet package nuget-niscode-service
-      if: env.RELEASE_VERSION != 'none'
-      uses: actions/download-artifact@v3
-      with:
-        name: nuget-niscode-service
-        path: ~/
-
     - name: Download NuGet package nuget-niscode-service-abstractions
       if: env.RELEASE_VERSION != 'none'
       uses: actions/download-artifact@v3
@@ -260,19 +236,10 @@ jobs:
         name: nuget-niscode-service-abstractions
         path: ~/
 
-    - name: Download NuGet package nuget-niscode-service-proxy-httpproxy
-      if: env.RELEASE_VERSION != 'none'
-      uses: actions/download-artifact@v3
-      with:
-        name: nuget-niscode-service-proxy-httpproxy
-        path: ~/
-
     - name: Publish packages to NuGet
       shell: bash
       run: |
-        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.NisCodeService.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
         dotnet nuget push ~/Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
-        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.NisCodeService.Proxy.HttpProxy.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
       env:
         SEMVER: ${{ needs.build.outputs.version }}
         WORKSPACE: ${{ github.workspace }}
@@ -295,24 +262,24 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Download artifacts
-      - name: Download NisCodeService
+      - name: Download NisCodeOrganizationSync
         uses: actions/download-artifact@v3
         with:
-          name: NisCodeService
+          name: NisCodeOrganizationSync
           path: ~/
 
       # Load artifacts
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-niscode-image.tar
+          docker image load -i ~/ns-niscode-organization-sync-image.tar
 
       - name: Push artifacts to ECR Test
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
           echo $SEMVER
-          docker push ghcr.io/niscode-service/niscode:$SEMVER
+          docker push ghcr.io/niscode-service/niscode-organization-sync:$SEMVER
         env:          
           SEMVER: ${{ needs.build.outputs.version }}
           WORKSPACE: ${{ github.workspace }}
@@ -339,10 +306,10 @@ jobs:
       # Download artifacts
       #
 
-      - name: Download NisCodeService
+      - name: Download NisCodeOrganizationSync
         uses: actions/download-artifact@v3
         with:
-          name: NisCodeService
+          name: NisCodeOrganizationSync
           path: ~/
 
       #
@@ -352,14 +319,14 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-niscode-image.tar
+          docker image load -i ~/ns-niscode-organization-sync-image.tar
 
       - name: Push artifacts to ECR Test
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
           echo $SEMVER
-          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscode:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscode-organization-sync:$SEMVER
         env:
           BUILD_DOCKER_REGISTRY: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
           SEMVER: ${{ needs.build.outputs.version }}
@@ -387,10 +354,10 @@ jobs:
       # Download artifacts
       #
 
-      - name: Download NisCodeService
+      - name: Download NisCodeOrganizationSync
         uses: actions/download-artifact@v3
         with:
-          name: NisCodeService
+          name: NisCodeOrganizationSync
           path: ~/
 
       #
@@ -400,14 +367,14 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-niscode-image.tar
+          docker image load -i ~/ns-niscode-organization-sync-image.tar
 
       - name: Push artifacts to ECR Staging
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
-          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscode:$SEMVER $BUILD_DOCKER_REGISTRY/niscode-service/niscode:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscode:$SEMVER
+          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscode-organization-sync:$SEMVER $BUILD_DOCKER_REGISTRY/niscode-service/niscode-organization-sync:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY/niscode-service/niscode-organization-sync:$SEMVER
 
         env:
           BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
@@ -437,10 +404,10 @@ jobs:
       # Download artifacts
       #
 
-      - name: Download NisCodeService
+      - name: Download NisCodeOrganizationSync
         uses: actions/download-artifact@v3
         with:
-          name: NisCodeService
+          name: NisCodeOrganizationSync
           path: ~/
 
       #
@@ -450,14 +417,14 @@ jobs:
       - name: Load artifacts
         shell: bash
         run: |
-          docker image load -i ~/ns-niscode-image.tar
+          docker image load -i ~/ns-niscode-organization-sync-image.tar
 
       - name: Push artifacts to ECR Production
         if: needs.build.outputs.version != 'none'
         shell: bash
         run: |
-          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscode:$SEMVER $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscode:$SEMVER
-          docker push $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscode:$SEMVER
+          docker tag $BUILD_DOCKER_REGISTRY_TST/niscode-service/niscode-organization-sync:$SEMVER $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscode-organization-sync:$SEMVER
+          docker push $BUILD_DOCKER_REGISTRY_PRD/niscode-service/niscode-organization-sync:$SEMVER
 
         env:
           BUILD_DOCKER_REGISTRY_TST: ${{ secrets.VBR_BUILD_DOCKER_REGISTRY_TST }}
@@ -487,208 +454,208 @@ jobs:
         SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
         REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
 
-  deploy_to_test:
-    if: github.repository_owner == 'Informatievlaanderen'
-    needs: [deploy_to_test_start_slack, build]
-    name: Deploy to test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        services: ['microservices-niscode']
+  # deploy_to_test:
+  #   if: github.repository_owner == 'Informatievlaanderen'
+  #   needs: [deploy_to_test_start_slack, build]
+  #   name: Deploy to test
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       services: ['microservices-niscode']
 
-    steps:
-    - name: Deploy services
-      env:
-        BUILD_URL: ${{ secrets.VBR_AWS_BUILD_API }}/${{matrix.services}}
-        STATUS_URL: ${{ secrets.VBR_AWS_BUILD_STATUS_API }}/${{matrix.services}}
-      uses: informatievlaanderen/awscurl-polling-action/polling-action@main
-      with:
-          environment: test
-          version: ${{ needs.build.outputs.version }}
-          status-url: $STATUS_URL
-          deploy-url: $BUILD_URL
-          access-key: ${{ secrets.VBR_AWS_BUILD_USER_ACCESS_KEY_ID }}
-          secret-key: ${{ secrets.VBR_AWS_BUILD_USER_SECRET_ACCESS_KEY }}
-          region: eu-west-1
-          interval: 2
+  #   steps:
+  #   - name: Deploy services
+  #     env:
+  #       BUILD_URL: ${{ secrets.VBR_AWS_BUILD_API }}/${{matrix.services}}
+  #       STATUS_URL: ${{ secrets.VBR_AWS_BUILD_STATUS_API }}/${{matrix.services}}
+  #     uses: informatievlaanderen/awscurl-polling-action/polling-action@main
+  #     with:
+  #         environment: test
+  #         version: ${{ needs.build.outputs.version }}
+  #         status-url: $STATUS_URL
+  #         deploy-url: $BUILD_URL
+  #         access-key: ${{ secrets.VBR_AWS_BUILD_USER_ACCESS_KEY_ID }}
+  #         secret-key: ${{ secrets.VBR_AWS_BUILD_USER_SECRET_ACCESS_KEY }}
+  #         region: eu-west-1
+  #         interval: 2
 
-    - name: Deploy services output
-      shell: bash
-      run: |
-        echo build-uuid: ${{ steps.awscurl-polling-action.outputs.build-uuid }}
-        echo Status: ${{ steps.awscurl-polling-action.outputs.status }}
-        echo ${{ steps.awscurl-polling-action.outputs.final-message }}
+  #   - name: Deploy services output
+  #     shell: bash
+  #     run: |
+  #       echo build-uuid: ${{ steps.awscurl-polling-action.outputs.build-uuid }}
+  #       echo Status: ${{ steps.awscurl-polling-action.outputs.status }}
+  #       echo ${{ steps.awscurl-polling-action.outputs.final-message }}
 
 
-  deploy_to_test_finish_slack:
-    if: github.repository_owner == 'Informatievlaanderen'
-    needs:  [deploy_to_test]  
-    name: Deploy to test finished
-    runs-on: ubuntu-latest
+  # deploy_to_test_finish_slack:
+  #   if: github.repository_owner == 'Informatievlaanderen'
+  #   needs:  [deploy_to_test]  
+  #   name: Deploy to test finished
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Parse repository name
-      run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
-      shell: bash
+  #   steps:
+  #   - name: Parse repository name
+  #     run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
+  #     shell: bash
 
-    - name: Notify deployment finished
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        channel-id: '#team-dinosaur-dev'
-        slack-message: Deployment of niscode-service to test has finished
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
-        SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
-        REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
+  #   - name: Notify deployment finished
+  #     uses: slackapi/slack-github-action@v1.23.0
+  #     with:
+  #       channel-id: '#team-dinosaur-dev'
+  #       slack-message: Deployment of niscode-service to test has finished
+  #     env:
+  #       SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
+  #       SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
+  #       REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
 
-  deploy_to_staging_start_slack:
-    if: github.repository_owner == 'Informatievlaanderen'
-    needs: [push_images_to_staging, deploy_to_test_finish_slack, build]
-    name: Deploy to staging started
-    environment: stg
-    runs-on: ubuntu-latest
+  # deploy_to_staging_start_slack:
+  #   if: github.repository_owner == 'Informatievlaanderen'
+  #   needs: [push_images_to_staging, deploy_to_test_finish_slack, build]
+  #   name: Deploy to staging started
+  #   environment: stg
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Parse repository name
-      run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
-      shell: bash
+  #   steps:
+  #   - name: Parse repository name
+  #     run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
+  #     shell: bash
 
-    - name: Notify deployment started
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        channel-id: '#team-dinosaur-dev'
-        slack-message: Deployment of niscode-service to staging has started
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
-        SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
-        REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
+  #   - name: Notify deployment started
+  #     uses: slackapi/slack-github-action@v1.23.0
+  #     with:
+  #       channel-id: '#team-dinosaur-dev'
+  #       slack-message: Deployment of niscode-service to staging has started
+  #     env:
+  #       SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
+  #       SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
+  #       REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
 
-  deploy_to_staging:
-    if: github.repository_owner == 'Informatievlaanderen'
-    needs: [deploy_to_staging_start_slack, build]
-    name: Deploy to staging
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        services: ['microservices-niscode']
+  # deploy_to_staging:
+  #   if: github.repository_owner == 'Informatievlaanderen'
+  #   needs: [deploy_to_staging_start_slack, build]
+  #   name: Deploy to staging
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       services: ['microservices-niscode']
 
-    steps:
-    - name: CD services
-      env:
-        BUILD_URL: ${{ secrets.VBR_AWS_BUILD_API }}/${{matrix.services}}
-        STATUS_URL: ${{ secrets.VBR_AWS_BUILD_STATUS_API }}/${{matrix.services}}
-      uses: informatievlaanderen/awscurl-polling-action/polling-action@main
-      with:
-          environment: stg
-          version: ${{ needs.build.outputs.version }}
-          status-url: $STATUS_URL
-          deploy-url: $BUILD_URL
-          access-key: ${{ secrets.VBR_AWS_BUILD_USER_ACCESS_KEY_ID }}
-          secret-key: ${{ secrets.VBR_AWS_BUILD_USER_SECRET_ACCESS_KEY }}
-          region: eu-west-1
-          interval: 2
+  #   steps:
+  #   - name: CD services
+  #     env:
+  #       BUILD_URL: ${{ secrets.VBR_AWS_BUILD_API }}/${{matrix.services}}
+  #       STATUS_URL: ${{ secrets.VBR_AWS_BUILD_STATUS_API }}/${{matrix.services}}
+  #     uses: informatievlaanderen/awscurl-polling-action/polling-action@main
+  #     with:
+  #         environment: stg
+  #         version: ${{ needs.build.outputs.version }}
+  #         status-url: $STATUS_URL
+  #         deploy-url: $BUILD_URL
+  #         access-key: ${{ secrets.VBR_AWS_BUILD_USER_ACCESS_KEY_ID }}
+  #         secret-key: ${{ secrets.VBR_AWS_BUILD_USER_SECRET_ACCESS_KEY }}
+  #         region: eu-west-1
+  #         interval: 2
           
-    - name: output CD services
-      shell: bash
-      run: |
-        echo build-uuid: ${{ steps.awscurl-polling-action.outputs.build-uuid }}
-        echo Status: ${{ steps.awscurl-polling-action.outputs.status }}
-        echo ${{ steps.awscurl-polling-action.outputs.final-message }}
+  #   - name: output CD services
+  #     shell: bash
+  #     run: |
+  #       echo build-uuid: ${{ steps.awscurl-polling-action.outputs.build-uuid }}
+  #       echo Status: ${{ steps.awscurl-polling-action.outputs.status }}
+  #       echo ${{ steps.awscurl-polling-action.outputs.final-message }}
 
 
-  deploy_to_staging_finish_slack:
-    if: github.repository_owner == 'Informatievlaanderen'
-    needs:  [deploy_to_staging]  
-    name: Deploy to staging finished
-    runs-on: ubuntu-latest
+  # deploy_to_staging_finish_slack:
+  #   if: github.repository_owner == 'Informatievlaanderen'
+  #   needs:  [deploy_to_staging]  
+  #   name: Deploy to staging finished
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Parse repository name
-      run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
-      shell: bash
+  #   steps:
+  #   - name: Parse repository name
+  #     run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
+  #     shell: bash
 
-    - name: Notify deployment finished
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        channel-id: '#team-dinosaur-dev'
-        slack-message: Deployment of niscode-service to staging has finished
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
-        SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
-        REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
+  #   - name: Notify deployment finished
+  #     uses: slackapi/slack-github-action@v1.23.0
+  #     with:
+  #       channel-id: '#team-dinosaur-dev'
+  #       slack-message: Deployment of niscode-service to staging has finished
+  #     env:
+  #       SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
+  #       SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
+  #       REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
 
-  deploy_to_production_start_slack:
-    if: github.repository_owner == 'Informatievlaanderen'
-    needs: [push_images_to_production, deploy_to_staging_finish_slack, build]
-    name: Deploy to production started
-    environment: prd
-    runs-on: ubuntu-latest
+  # deploy_to_production_start_slack:
+  #   if: github.repository_owner == 'Informatievlaanderen'
+  #   needs: [push_images_to_production, deploy_to_staging_finish_slack, build]
+  #   name: Deploy to production started
+  #   environment: prd
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Parse repository name
-      run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
-      shell: bash
+  #   steps:
+  #   - name: Parse repository name
+  #     run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
+  #     shell: bash
 
-    - name: Notify deployment started
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        channel-id: '#team-dinosaur-dev'
-        slack-message: Deployment of niscode-service to production has started
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
-        SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
-        REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
+  #   - name: Notify deployment started
+  #     uses: slackapi/slack-github-action@v1.23.0
+  #     with:
+  #       channel-id: '#team-dinosaur-dev'
+  #       slack-message: Deployment of niscode-service to production has started
+  #     env:
+  #       SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
+  #       SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
+  #       REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
         
-  deploy_to_production:
-    if: github.repository_owner == 'Informatievlaanderen'
-    needs: [deploy_to_production_start_slack, build]
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: 
-        services: ['microservices-niscode']
+  # deploy_to_production:
+  #   if: github.repository_owner == 'Informatievlaanderen'
+  #   needs: [deploy_to_production_start_slack, build]
+  #   name: Deploy to Production
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix: 
+  #       services: ['microservices-niscode']
 
-    steps:
-    - name: CD services
-      env:
-        BUILD_URL: ${{ secrets.VBR_AWS_BUILD_API }}/${{matrix.services}}
-        STATUS_URL: ${{ secrets.VBR_AWS_BUILD_STATUS_API }}/${{matrix.services}}
-      uses: informatievlaanderen/awscurl-polling-action/polling-action@main
-      with:
-          environment: prd
-          version: ${{ needs.build.outputs.version }}
-          status-url: $STATUS_URL
-          deploy-url: $BUILD_URL
-          access-key: ${{ secrets.VBR_AWS_BUILD_USER_ACCESS_KEY_ID }}
-          secret-key: ${{ secrets.VBR_AWS_BUILD_USER_SECRET_ACCESS_KEY }}
-          region: eu-west-1
-          interval: 2
+  #   steps:
+  #   - name: CD services
+  #     env:
+  #       BUILD_URL: ${{ secrets.VBR_AWS_BUILD_API }}/${{matrix.services}}
+  #       STATUS_URL: ${{ secrets.VBR_AWS_BUILD_STATUS_API }}/${{matrix.services}}
+  #     uses: informatievlaanderen/awscurl-polling-action/polling-action@main
+  #     with:
+  #         environment: prd
+  #         version: ${{ needs.build.outputs.version }}
+  #         status-url: $STATUS_URL
+  #         deploy-url: $BUILD_URL
+  #         access-key: ${{ secrets.VBR_AWS_BUILD_USER_ACCESS_KEY_ID }}
+  #         secret-key: ${{ secrets.VBR_AWS_BUILD_USER_SECRET_ACCESS_KEY }}
+  #         region: eu-west-1
+  #         interval: 2
 
-    - name: output CD services
-      shell: bash
-      run: |
-        echo build-uuid: ${{ steps.awscurl-polling-action.outputs.build-uuid }}
-        echo Status: ${{ steps.awscurl-polling-action.outputs.status }}
-        echo ${{ steps.awscurl-polling-action.outputs.final-message }}
+  #   - name: output CD services
+  #     shell: bash
+  #     run: |
+  #       echo build-uuid: ${{ steps.awscurl-polling-action.outputs.build-uuid }}
+  #       echo Status: ${{ steps.awscurl-polling-action.outputs.status }}
+  #       echo ${{ steps.awscurl-polling-action.outputs.final-message }}
 
 
-  deploy_to_production_finish_slack:
-    if: github.repository_owner == 'Informatievlaanderen'
-    needs:  [deploy_to_production]  
-    name: Deploy to production finished
-    runs-on: ubuntu-latest
+  # deploy_to_production_finish_slack:
+  #   if: github.repository_owner == 'Informatievlaanderen'
+  #   needs:  [deploy_to_production]  
+  #   name: Deploy to production finished
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Parse repository name
-      run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
-      shell: bash
+  #   steps:
+  #   - name: Parse repository name
+  #     run: echo REPOSITORY_NAME=$(echo ""$GITHUB_REPOSITORY"" | awk -F / '{print $2}' | sed -e ""s/:refs//"") >> $GITHUB_ENV
+  #     shell: bash
 
-    - name: Notify deployment finished
-      uses: slackapi/slack-github-action@v1.23.0
-      with:
-        channel-id: '#team-dinosaur-dev'
-        slack-message: Deployment of niscode-service to production has finished
-      env:
-        SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
-        SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
-        REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
+  #   - name: Notify deployment finished
+  #     uses: slackapi/slack-github-action@v1.23.0
+  #     with:
+  #       channel-id: '#team-dinosaur-dev'
+  #       slack-message: Deployment of niscode-service to production has finished
+  #     env:
+  #       SLACK_BOT_TOKEN: ${{ secrets.VBR_SLACK_BOT_TOKEN }}
+  #       SLACK_CHANNEL: ${{ secrets.VBR_NOTIFIER_CHANNEL_NAME }}
+  #       REPOSITORY_NAME: ${{ env.REPOSITORY_NAME }}
