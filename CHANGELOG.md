@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.12...v1.1.0) (2023-04-14)
+
+
+### Bug Fixes
+
+* publish to github ([1f8c575](https://github.com/informatievlaanderen/niscode-service/commit/1f8c575b301809b7494c932bdcac52e9bfe349ad))
+
+
+### Features
+
+* create organization sync console service + cleanup ([5605eb5](https://github.com/informatievlaanderen/niscode-service/commit/5605eb5b2bc9875bba696f9560657cd673d32f41))
+
 ## [1.0.12](https://github.com/informatievlaanderen/niscode-service/compare/v1.0.11...v1.0.12) (2023-02-01)
 
 
