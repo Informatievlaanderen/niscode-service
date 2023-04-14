@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/informatievlaanderen/niscode-service/compare/v1.1.1...v1.1.2) (2023-04-14)
+
+
+### Bug Fixes
+
+* style to trigger build ([8f6491e](https://github.com/informatievlaanderen/niscode-service/commit/8f6491e8732273be2a0908e476865a75eb83a46b))
+
 ## [1.1.1](https://github.com/informatievlaanderen/niscode-service/compare/v1.1.0...v1.1.1) (2023-04-14)
 
 
