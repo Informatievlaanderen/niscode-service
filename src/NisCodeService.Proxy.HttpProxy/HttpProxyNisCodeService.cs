@@ -19,6 +19,6 @@ public class HttpProxyNisCodeService : INisCodeService
     public async Task<Dictionary<string, string>> GetAll(CancellationToken cancellationToken = default) =>
         await _httpClient.GetFromJsonAsync<Dictionary<string, string>>("/niscode", cancellationToken) ?? new Dictionary<string, string>();
 
-    public async Task<string?> Get(string ovoCode, CancellationToken cancellationToken = default) =>
+    public async Task<string> Get(string ovoCode, CancellationToken cancellationToken = default) =>
         await _httpClient.GetStringAsync($"/niscode/{ovoCode}", cancellationToken: cancellationToken);
 }
