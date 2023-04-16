@@ -24,7 +24,11 @@
             using var _ = DockerComposer.Compose("dynamodb.yml", "niscode-sync-integration-dynamo-test");
 
             const string tableName = TableNames.OvoNisCodes;
-            var dynamoDb = new AmazonDynamoDBClient(new BasicAWSCredentials("key", "secret"), RegionEndpoint.GetBySystemName("local"));
+            var dynamoDb = new AmazonDynamoDBClient(new BasicAWSCredentials("key", "secret"), new AmazonDynamoDBConfig
+            {
+                RegionEndpoint = RegionEndpoint.GetBySystemName("local"),
+                ServiceURL = "http://localhost:8001",
+            });
 
             // Wait for docker container
             await WaitForDynamoDbToBecomeAvailable(dynamoDb, tableName);
