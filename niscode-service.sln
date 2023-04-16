@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NisCodeService.Sync.Organiz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NisCodeService.DynamoDb", "src\NisCodeService.DynamoDb\NisCodeService.DynamoDb.csproj", "{F2BF56CA-4BC6-4DF1-80E1-9D21C0783684}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NisCodeService.DynamoDb.Tests", "test\NisCodeService.DynamoDb.Tests\NisCodeService.DynamoDb.Tests.csproj", "{F00DACD3-75D4-42A7-BD69-5B54950F3023}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{F2BF56CA-4BC6-4DF1-80E1-9D21C0783684}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2BF56CA-4BC6-4DF1-80E1-9D21C0783684}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2BF56CA-4BC6-4DF1-80E1-9D21C0783684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F00DACD3-75D4-42A7-BD69-5B54950F3023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F00DACD3-75D4-42A7-BD69-5B54950F3023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F00DACD3-75D4-42A7-BD69-5B54950F3023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F00DACD3-75D4-42A7-BD69-5B54950F3023}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{ED4A6BE3-2523-4D5A-9ED7-8EC95D7F2BEA} = {9CB3983B-FF27-4E89-A810-F7F645FC8274}
 		{2B7B3EFF-B69A-43E5-ADA9-18C36AABA089} = {9CB3983B-FF27-4E89-A810-F7F645FC8274}
 		{F2BF56CA-4BC6-4DF1-80E1-9D21C0783684} = {155FF959-48BC-4039-8DA4-374E6CF7E492}
+		{F00DACD3-75D4-42A7-BD69-5B54950F3023} = {9CB3983B-FF27-4E89-A810-F7F645FC8274}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB8D6A6F-B06E-4C81-A00A-EBBBA9DB308A}

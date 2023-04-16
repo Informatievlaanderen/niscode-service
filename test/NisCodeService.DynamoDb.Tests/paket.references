@@ -1,0 +1,8 @@
+FluentAssertions
+AWSSDK.DynamoDBv2
+Be.Vlaanderen.Basisregisters.DockerUtilities
+
+Microsoft.Extensions.Logging.Abstractions
+Microsoft.NET.Test.Sdk
+xunit.runner.visualstudio
+xunit
