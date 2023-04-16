@@ -48,12 +48,14 @@ Target.create "Test_Solution" (fun _ -> testSolution "niscode-service")
 Target.create "Publish_Solution" (fun _ ->
   [
     "NisCodeService.Abstractions"
+    "NisCodeService.DynamoDb"
     "NisCodeService.Sync.OrganizationRegistry"
   ] |> List.iter publishSource)
 
 Target.create "Pack_Solution" (fun _ ->
   [
     "NisCodeService.Abstractions"
+    "NisCodeService.DynamoDb"
   ] |> List.iter pack)
 
 Target.create "Containerize_NisCodeOrganizationSync" (fun _ -> containerize "NisCodeService.Sync.OrganizationRegistry" "niscode-organization-sync")

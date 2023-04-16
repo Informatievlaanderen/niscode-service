@@ -8,25 +8,15 @@ namespace NisCodeService.Sync.OrganizationRegistry
     using Amazon.DynamoDBv2;
     using Amazon.DynamoDBv2.DocumentModel;
     using Amazon.DynamoDBv2.Model;
-    using Infrastructure;
-    using Microsoft.Extensions.Options;
+    using DynamoDb;
 
     public sealed class DynamoDbNisCodeStorage : IKeyValuePairStorage
     {
         private readonly IAmazonDynamoDB _dynamoDb;
-        private readonly ServiceOptions _serviceOptions;
 
-        internal class ColumnNames
-        {
-            public const string OvoCode = "ovocode";
-            public const string NisCode = "niscode";
-            public const string Timestamp = "timestamp";
-        }
-
-        public DynamoDbNisCodeStorage(IAmazonDynamoDB dynamoDb, IOptions<ServiceOptions> options)
+        public DynamoDbNisCodeStorage(IAmazonDynamoDB dynamoDb)
         {
             _dynamoDb = dynamoDb;
-            _serviceOptions = options.Value;
         }
 
         public async Task Persist(IDictionary<string, string> dictionary, CancellationToken ct)
@@ -37,7 +27,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
 
             await UpsertItemsInDictionary(dictionary, table, ct);
         }
-        
+
         private static async Task DeleteItemsNotInDictionary(IDictionary<string, string> dictionary, Table table, CancellationToken ct)
         {
             var allItems = await table.Scan(new ScanFilter()).GetRemainingAsync(ct);
@@ -88,7 +78,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
         {
             await CreateTableAsync();
 
-            return Table.LoadTable(_dynamoDb, _serviceOptions.TableName);
+            return Table.LoadTable(_dynamoDb, TableNames.OvoNisCodes);
         }
 
         private async Task CreateTableAsync()
@@ -102,7 +92,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
 
                 await _dynamoDb.CreateTableAsync(new CreateTableRequest
                 {
-                    TableName = _serviceOptions.TableName,
+                    TableName = TableNames.OvoNisCodes,
                     AttributeDefinitions = new List<AttributeDefinition>
                     {
                         new AttributeDefinition
@@ -142,7 +132,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
                 var request = new ListTablesRequest { ExclusiveStartTableName = lastEvaluatedTableName };
 
                 var result = await _dynamoDb.ListTablesAsync(request);
-                if (result.TableNames.Any(t => t == _serviceOptions.TableName))
+                if (result.TableNames.Any(t => t == TableNames.OvoNisCodes))
                 {
                     return true;
                 }
