@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/informatievlaanderen/niscode-service/compare/v1.1.2...v1.2.0) (2023-04-17)
+
+
+### Features
+
+* add dynamodb niscode service + refactor shared settings ([399dc0a](https://github.com/informatievlaanderen/niscode-service/commit/399dc0a6568beebfdce9ee20e6e7653b58ec171f))
+
 ## [1.1.2](https://github.com/informatievlaanderen/niscode-service/compare/v1.1.1...v1.1.2) (2023-04-14)
 
 
