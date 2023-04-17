@@ -3,7 +3,7 @@ services:
   dynamodb-local:
     command: "-jar DynamoDBLocal.jar -inMemory"
     image: "amazon/dynamodb-local:latest"
-    container_name: dynamodb-local
+    container_name: dynamodb-local-integration-tests
     ports:
-      - "8001:8000"
+      - "8002:8000"
     working_dir: /home/dynamodblocal

@@ -6,7 +6,8 @@
   </PropertyGroup>
   <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.App.props" />
   <ItemGroup>
-    <ProjectReference Include="..\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj" />
+    <ProjectReference Include="..\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj" />    
+    <ProjectReference Include="..\NisCodeService.DynamoDb\NisCodeService.DynamoDb.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dockerfile" CopyToOutputDirectory="Always" />
