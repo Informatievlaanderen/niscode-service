@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/informatievlaanderen/niscode-service/compare/v1.2.1...v1.2.2) (2023-04-19)
+
+
+### Bug Fixes
+
+* add hardcoded package ([3998b87](https://github.com/informatievlaanderen/niscode-service/commit/3998b87b85083cb642df4eb17201941b54a2cc4c))
+
 ## [1.2.1](https://github.com/informatievlaanderen/niscode-service/compare/v1.2.0...v1.2.1) (2023-04-19)
 
 
