@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/informatievlaanderen/niscode-service/compare/v1.2.0...v1.2.1) (2023-04-19)
+
+
+### Bug Fixes
+
+* add cd pipeline ([5bad4f7](https://github.com/informatievlaanderen/niscode-service/commit/5bad4f74e93498e85eb0697ca92fe71bd0e4b436))
+* remove tablename from settings ([6de0e36](https://github.com/informatievlaanderen/niscode-service/commit/6de0e36fb4045ee49bef2ee004eed92df7e0568a))
+
 # [1.2.0](https://github.com/informatievlaanderen/niscode-service/compare/v1.1.2...v1.2.0) (2023-04-17)
 
 
