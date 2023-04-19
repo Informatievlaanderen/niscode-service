@@ -8,5 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="..\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="paket.template" CopyToOutputDirectory="Always" />
+  </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

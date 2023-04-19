@@ -49,6 +49,7 @@ Target.create "Publish_Solution" (fun _ ->
   [
     "NisCodeService.Abstractions"
     "NisCodeService.DynamoDb"
+    "NisCodeService.HardCoded"
     "NisCodeService.Sync.OrganizationRegistry"
   ] |> List.iter publishSource)
 
@@ -56,6 +57,7 @@ Target.create "Pack_Solution" (fun _ ->
   [
     "NisCodeService.Abstractions"
     "NisCodeService.DynamoDb"
+    "NisCodeService.HardCoded"
   ] |> List.iter pack)
 
 Target.create "Containerize_NisCodeOrganizationSync" (fun _ -> containerize "NisCodeService.Sync.OrganizationRegistry" "niscode-organization-sync")
