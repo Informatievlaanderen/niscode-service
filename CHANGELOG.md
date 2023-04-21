@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/informatievlaanderen/niscode-service/compare/v1.2.2...v1.3.0) (2023-04-21)
+
+
+### Features
+
+* add niscodefinder & ovocodewhitlist ([f31c392](https://github.com/informatievlaanderen/niscode-service/commit/f31c3929ba0b9d9650698e97515f4cb097183712))
+
 ## [1.2.2](https://github.com/informatievlaanderen/niscode-service/compare/v1.2.1...v1.2.2) (2023-04-19)
 
 
