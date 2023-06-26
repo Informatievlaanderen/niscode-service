@@ -333,7 +333,7 @@ jobs:
 
       - name: Login to Amazon ECR (Test)
         if: needs.build.outputs.version != 'none'
-        uses: aws-actions/amazon-ecr-login@v1.5.2
+        uses: aws-actions/amazon-ecr-login@v1.6.1
 
       #
       # Download artifacts
@@ -381,7 +381,7 @@ jobs:
 
       - name: Login to Amazon ECR (Staging)
         if: needs.build.outputs.version != 'none'
-        uses: aws-actions/amazon-ecr-login@v1.5.2
+        uses: aws-actions/amazon-ecr-login@v1.6.1
 
       #
       # Download artifacts
@@ -431,7 +431,7 @@ jobs:
 
       - name: Login to Amazon ECR (Production)
         if: needs.build.outputs.version != 'none'
-        uses: aws-actions/amazon-ecr-login@v1.5.2
+        uses: aws-actions/amazon-ecr-login@v1.6.1
 
       #
       # Download artifacts
