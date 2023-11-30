@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/informatievlaanderen/niscode-service/compare/v1.3.3...v1.3.4) (2023-11-30)
+
+
+### Bug Fixes
+
+* dependencies ([aec364f](https://github.com/informatievlaanderen/niscode-service/commit/aec364ff34e715c00b8283f246eb45537885205b))
+
 ## [1.3.3](https://github.com/informatievlaanderen/niscode-service/compare/v1.3.2...v1.3.3) (2023-11-30)
 
 
