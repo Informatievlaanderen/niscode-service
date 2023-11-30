@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/informatievlaanderen/niscode-service/compare/v1.3.2...v1.3.3) (2023-11-30)
+
+
+### Bug Fixes
+
+* correct hardcoded niscodes ([bba8d8e](https://github.com/informatievlaanderen/niscode-service/commit/bba8d8e4b0182e71421491e0868a3199be7680d3))
+
 ## [1.3.2](https://github.com/informatievlaanderen/niscode-service/compare/v1.3.1...v1.3.2) (2023-04-21)
 
 
