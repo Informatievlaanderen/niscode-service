@@ -16,6 +16,7 @@ description NisCodeService HardCoded implementation.
 
 dependencies
   framework: net6.0
+    Microsoft.Extensions.DependencyInjection.Abstractions >= LOCKEDVERSION
     Microsoft.Extensions.Logging.Abstractions >= LOCKEDVERSION
 
 files

@@ -17,6 +17,7 @@ description NisCodeService DynamoDb implementation.
 dependencies
   framework: net6.0
     AWSSDK.DynamoDBv2 >= LOCKEDVERSION
+    Microsoft.Extensions.DependencyInjection.Abstractions >= LOCKEDVERSION
     Microsoft.Extensions.Logging.Abstractions >= LOCKEDVERSION
 
 files

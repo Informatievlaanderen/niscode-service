@@ -1,29 +1,29 @@
 framework: net6.0
-
+strategy: min
 source https://api.nuget.org/v3/index.json
 
 nuget AWSSDK.DynamoDBv2 3.7.102.15
-
-// VBR STUFF
-nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6
-nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
-nuget Be.Vlaanderen.Basisregisters.Aws.DistributedMutex 3.0.1
 
 // PRODUCTION STUFF
 nuget Microsoft.Extensions.DependencyInjection.Abstractions 6.0.0
 nuget Microsoft.Extensions.Hosting 6.0.1
 nuget Microsoft.Extensions.Http 6.0.0
 nuget Microsoft.Extensions.Logging.Abstractions 6.0.3
-nuget Newtonsoft.Json 13.0.2
+nuget Newtonsoft.Json 13.0.3
+
+// VBR STUFF
+nuget Be.Vlaanderen.Basisregisters.Build.Pipeline 6.0.6 strategy:max
+nuget Be.Vlaanderen.Basisregisters.DockerUtilities 1.0.1
+nuget Be.Vlaanderen.Basisregisters.Aws.DistributedMutex 3.0.1
 
 // TEST STUFF
-nuget Moq 4.18.4
-nuget FluentAssertions 6.8.0
-nuget Microsoft.AspNetCore.Mvc.Testing 6.0.16
-nuget Microsoft.AspNetCore.TestHost 6.0.16
-nuget Microsoft.NET.Test.Sdk 17.4.1
-nuget xunit 2.4.2
-nuget xunit.runner.visualstudio 2.4.5
+nuget Moq 4.18.4 strategy:max
+nuget FluentAssertions 6.8.0 strategy:max
+nuget Microsoft.AspNetCore.Mvc.Testing 6.0.16 strategy:max
+nuget Microsoft.AspNetCore.TestHost 6.0.16 strategy:max
+nuget Microsoft.NET.Test.Sdk 17.4.1 strategy:max
+nuget xunit 2.4.2 strategy:max
+nuget xunit.runner.visualstudio 2.4.5 strategy:max
 
 // BUILD STUFF
 nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true
