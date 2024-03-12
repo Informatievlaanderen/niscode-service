@@ -15,10 +15,10 @@ licenseUrl https://opensource.org/licenses/EUPL-1.2
 description NisCodeService Abstractions.
 
 dependencies
-  framework: net6.0
+  framework: netstandard2.1
     Microsoft.Extensions.DependencyInjection.Abstractions >= LOCKEDVERSION
     Microsoft.Extensions.Logging.Abstractions >= LOCKEDVERSION
 
 files
-  NisCodeService.Abstractions.dll => lib\net6.0
-  NisCodeService.Abstractions.pdb => lib\net6.0
+  NisCodeService.Abstractions.dll => lib\netstandard2.1
+  NisCodeService.Abstractions.pdb => lib\netstandard2.1
