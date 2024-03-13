@@ -60,7 +60,7 @@ jobs:
     needs: [ set-release-version ]
     if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
     with:
-      pack-file: NisCodeService.Abstractions
+      pack-file: Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions
       build-project: NisCodeService.Abstractions
       semver: ${{ needs.set-release-version.outputs.version }}
       dotnet-version: ${{ vars.VBR_DOTNET_VERSION_8 }}
@@ -72,7 +72,7 @@ jobs:
     needs: [ set-release-version ]
     if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
     with:
-      pack-file: NisCodeService.DynamoDb
+      pack-file: Be.Vlaanderen.Basisregisters.NisCodeService.DynamoDb
       test-project: NisCodeService.DynamoDb.Tests
       build-project: NisCodeService.DynamoDb
       semver: ${{ needs.set-release-version.outputs.version }}
@@ -85,7 +85,7 @@ jobs:
     needs: [ set-release-version ]
     if: ${{ (github.repository_owner == 'Informatievlaanderen') && (needs.set-release-version.outputs.version != 'none') }}
     with:
-      pack-file: NisCodeService.HardCoded
+      pack-file: Be.Vlaanderen.Basisregisters.NisCodeService.HardCoded
       test-project: NisCodeService.HardCoded.Tests
       build-project: NisCodeService.HardCoded
       semver: ${{ needs.set-release-version.outputs.version }}
@@ -155,21 +155,21 @@ jobs:
       uses: actions/download-artifact@v4
       continue-on-error: false
       with:
-        name: nuget-NisCodeService.Abstractions-${{ needs.set-release-version.outputs.version }}
+        name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions-${{ needs.set-release-version.outputs.version }}
         path: dist/nuget/
 
     - name: Download NuGet DynamoDb
       uses: actions/download-artifact@v4
       continue-on-error: false
       with:
-        name: nuget-NisCodeService.DynamoDb-${{ needs.set-release-version.outputs.version }}
+        name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.DynamoDb-${{ needs.set-release-version.outputs.version }}
         path: dist/nuget/
 
     - name: Download NuGet HardCoded
       uses: actions/download-artifact@v4
       continue-on-error: false
       with:
-        name: nuget-NisCodeService.HardCoded-${{ needs.set-release-version.outputs.version }}
+        name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.HardCoded-${{ needs.set-release-version.outputs.version }}
         path: dist/nuget/
 
     - name: Run Semantic Release
@@ -216,27 +216,27 @@ jobs:
     - name: Download NuGet Abstractions package
       uses: actions/download-artifact@v4
       with:
-        name: nuget-NisCodeService.Abstractions-${{ needs.release.outputs.version }}
+        name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions-${{ needs.release.outputs.version }}
         path: ~/
 
     - name: Download NuGet DynamoDb package
       uses: actions/download-artifact@v4
       with:
-        name: nuget-NisCodeService.DynamoDb-${{ needs.release.outputs.version }}
+        name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.DynamoDb-${{ needs.release.outputs.version }}
         path: ~/
 
     - name: Download NuGet HardCoded package
       uses: actions/download-artifact@v4
       with:
-        name: nuget-NisCodeService.HardCoded-${{ needs.release.outputs.version }}
+        name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.HardCoded-${{ needs.release.outputs.version }}
         path: ~/
 
     - name: Publish packages to NuGet
       shell: bash
       run: |
-        dotnet nuget push ~/NisCodeService.Abstractions.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
-        dotnet nuget push ~/NisCodeService.DynamoDb.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
-        dotnet nuget push ~/NisCodeService.HardCoded.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
+        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
+        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.NisCodeService.DynamoDb.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
+        dotnet nuget push ~/Be.Vlaanderen.Basisregisters.NisCodeService.HardCoded.$SEMVER.nupkg --source nuget.org --api-key $NUGET_API_KEY
       env:
         SEMVER: ${{  needs.release.outputs.version }}
         WORKSPACE: ${{ github.workspace }}
