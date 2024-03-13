@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v1.3.4...v2.0.0) (2024-03-13)
+
+
+### Features
+
+* move to dotnet 8.0.2 ([108b7eb](https://github.com/informatievlaanderen/niscode-service/commit/108b7eb66d8d3b57ddb92088352f1ffde28977e6))
+
+
+### BREAKING CHANGES
+
+* move to dotnet 8.0.2
+
 ## [1.3.4](https://github.com/informatievlaanderen/niscode-service/compare/v1.3.3...v1.3.4) (2023-11-30)
 
 
