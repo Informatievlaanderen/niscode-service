@@ -34,13 +34,18 @@
 
         public async Task<string?> Get(string ovoCode, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(ovoCode))
+            {
+                return null;
+            }
+
             //Get item column niscode by ovoCode
             var query = new GetItemRequest
             {
                 TableName = TableNames.OvoNisCodes,
                 Key = new Dictionary<string, AttributeValue>
                 {
-                    { ColumnNames.OvoCode, new AttributeValue { S = ovoCode } }
+                    { ColumnNames.OvoCode, new AttributeValue { S = ovoCode.ToUpper() } }
                 },
                 ProjectionExpression = ColumnNames.NisCode,
                 ConsistentRead = false

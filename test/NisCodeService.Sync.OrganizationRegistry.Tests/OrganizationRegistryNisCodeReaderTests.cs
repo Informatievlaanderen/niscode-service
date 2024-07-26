@@ -14,11 +14,9 @@ namespace NisCodeService.Sync.OrganizationRegistry.Tests
     {
         [Theory]
         [InlineData("OVO002067", "44021")]
-        [InlineData("002007", "13002")]
+        [InlineData("ovo002007", "13002")]
         public async Task ReadNisCodes(string? ovoCode, string expectedResult)
         {
-            ovoCode = ovoCode.WithoutOvoPrefix();
-
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddHttpClient();
             var services = serviceCollection.BuildServiceProvider();
