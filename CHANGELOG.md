@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v2.0.0...v3.0.0) (2024-07-29)
+
+
+### Bug Fixes
+
+* hardcoded OVO-codes must have "OVO" prefix + case insensitivity ([c476728](https://github.com/informatievlaanderen/niscode-service/commit/c476728ef6de0a8a82458fd11b40bad2d1306dc5))
+
+
+### BREAKING CHANGES
+
+* save the OVO part of the ovocode
+
 # [2.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v1.3.4...v2.0.0) (2024-03-13)
 
 
