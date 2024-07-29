@@ -94,7 +94,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
 
         private void AddOrganizationToCache(IDictionary<string, string> ovoNisCodeMapping, Organization organization)
         {
-            var ovoCode = GetOvoCode(organization).WithoutOvoPrefix();
+            var ovoCode = GetOvoCode(organization);
             if (ovoCode is null)
             {
                 return;

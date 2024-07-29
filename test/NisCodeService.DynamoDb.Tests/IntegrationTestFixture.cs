@@ -28,7 +28,7 @@
                 ServiceURL = "http://localhost:8002",
             });
 
-            OvoNisCodesDictionary = Enumerable.Range(0, 1000).ToDictionary(i => i.ToString(), i => "noescode");
+            OvoNisCodesDictionary = Enumerable.Range(0, 1000).ToDictionary(i => $"OVO{i:000000}", i => "niscode");
 
             await WaitForDynamoDbToBecomeAvailable(TableNames.OvoNisCodes);
             await SeedDynamo();

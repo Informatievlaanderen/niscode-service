@@ -9,11 +9,9 @@ namespace NisCodeService.HardCoded.Tests
     {
         [Theory]
         [InlineData("OVO002067", "44021")]
-        [InlineData("002007", "13002")]
+        [InlineData("ovo002007", "13002")]
         public async Task GetCode(string ovoCode, string expectedResult)
         {
-            ovoCode = ovoCode.WithoutOvoPrefix();
-
             INisCodeService nisCodeService = new HardCodedNisCodeService();
             var result = await nisCodeService.Get(ovoCode, CancellationToken.None);
 

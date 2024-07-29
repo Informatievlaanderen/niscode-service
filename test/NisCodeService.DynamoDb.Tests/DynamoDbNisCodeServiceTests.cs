@@ -48,7 +48,7 @@
         {
             // Arrange
             var r = new Random();
-            var ovoCode = _fixture.OvoNisCodesDictionary.Keys.ElementAt(r.Next(0, 999)).ToLower();
+            var ovoCode = _fixture.OvoNisCodesDictionary.Keys.ElementAt(r.Next(0, 999));
             var sut = new DynamoDbNisCodeService(_fixture.DynamoDb);
 
             // Act
