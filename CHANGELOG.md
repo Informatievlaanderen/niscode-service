@@ -1,3 +1,16 @@
+# [4.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v3.0.0...v4.0.0) (2024-10-25)
+
+
+### Features
+
+* add validatity to niscodes ([625cfad](https://github.com/informatievlaanderen/niscode-service/commit/625cfadb3620c00196342b892c2867a2c68d634b))
+
+
+### BREAKING CHANGES
+
+* NisCode reader now returns a List<OrganisationNisCode>
+instead of Dictionary<string, string>
+
 # [3.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v2.0.0...v3.0.0) (2024-07-29)
 
 
