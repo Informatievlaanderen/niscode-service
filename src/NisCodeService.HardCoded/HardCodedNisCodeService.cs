@@ -9,29 +9,34 @@
 
     public class HardCodedNisCodeService : INisCodeService
     {
-        private readonly Dictionary<string, string> _validNisCodeByOvoCodes;
+        private readonly Dictionary<string, List<OrganisationNisCode>> _allNisCodeByOvoCodes;
 
         public HardCodedNisCodeService()
         {
-            _validNisCodeByOvoCodes = new Dictionary<string, string>(
-                HardCodedNisCodes
-                    .AllHardCodedNisCodes
-                    .Where(x => x.IsValid(DateTime.Now))
-                    .ToDictionary(x => x.OvoCode, x=> x.NisCode)
+            _allNisCodeByOvoCodes = new Dictionary<string, List<OrganisationNisCode>>(
+                HardCodedNisCodes.AllHardCodedNisCodes
+                    .GroupBy(x => x.OvoCode)
+                    .ToDictionary(x => x.Key, x=> x.ToList())
                 , StringComparer.InvariantCultureIgnoreCase);
         }
 
         public Task<Dictionary<string, string>> GetAll(CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(_validNisCodeByOvoCodes);
+            return Task.FromResult(
+                new Dictionary<string, string>(
+                    HardCodedNisCodes
+                        .AllHardCodedNisCodes
+                        .Where(x => x.IsValid(DateTime.Now))
+                        .ToDictionary(x => x.OvoCode, x=> x.NisCode)
+                    , StringComparer.InvariantCultureIgnoreCase)
+                );
         }
 
-        public async Task<string?> Get(string ovoCode, CancellationToken cancellationToken = default)
+        public Task<string?> Get(string ovoCode, CancellationToken cancellationToken = default)
         {
-            var result = (await GetAll(cancellationToken))
-                .TryGetValue(ovoCode, out var nisCode);
+            _allNisCodeByOvoCodes.TryGetValue(ovoCode, out var nisCodes);
 
-            return nisCode;
+            return Task.FromResult(nisCodes?.SingleOrDefault(x => x.IsValid(DateTime.Now))?.NisCode);
         }
     }
 }
