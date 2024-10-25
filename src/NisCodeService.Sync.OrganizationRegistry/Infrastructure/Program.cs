@@ -66,7 +66,7 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
                     // {
                         services.AddSingleton<IAmazonDynamoDB, AmazonDynamoDBClient>();
                     // }
-                    services.AddSingleton<IKeyValuePairStorage, DynamoDbNisCodeStorage>();
+                    services.AddSingleton<IKeyValuePairStorage, LocalHardCodedNisCodeStorage>();
                 });
         }
     }
