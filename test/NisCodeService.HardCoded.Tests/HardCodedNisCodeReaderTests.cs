@@ -20,6 +20,24 @@ namespace NisCodeService.HardCoded.Tests
         }
 
         [Fact]
+        public async Task GetNisCodeOutsideValidity()
+        {
+            INisCodeService nisCodeService = new HardCodedNisCodeService();
+            var result = await nisCodeService.Get("0", CancellationToken.None);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task GetNonExistingNisCode()
+        {
+            INisCodeService nisCodeService = new HardCodedNisCodeService();
+            var result = await nisCodeService.Get("bla bla", CancellationToken.None);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
         public async Task GetAllCodes()
         {
             INisCodeService nisCodeService = new HardCodedNisCodeService();

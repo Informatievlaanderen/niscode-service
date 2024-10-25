@@ -96,7 +96,9 @@ jobs:
 
     - name: Test
       shell: bash
-      run: dotnet dotcover test --dcReportType=HTML --nologo --no-build niscode-service.sln
+      run: |
+        ln -s /usr/libexec/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose
+        dotnet dotcover test --dcReportType=HTML --nologo --no-build niscode-service.sln
 
     - name: Sonar end build & analyze
       env:

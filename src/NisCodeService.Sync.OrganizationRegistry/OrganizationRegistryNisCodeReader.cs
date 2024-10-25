@@ -27,7 +27,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
             _loggerFactory = loggerFactory;
         }
 
-        public async Task<Dictionary<string, string>> ReadNisCodes(CancellationToken cancellationToken = default)
+        public async Task<List<OrganisationNisCode>> ReadNisCodes(CancellationToken cancellationToken = default)
         {
             var logger = _loggerFactory.CreateLogger<OrganizationRegistryNisCodeReader>();
 
@@ -37,9 +37,9 @@ namespace NisCodeService.Sync.OrganizationRegistry
             var scrollId = string.Empty;
             var totalItems = 0;
 
-            var ovoNisCodeMapping = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+            var nisCodes = new List<OrganisationNisCode>();
 
-            while (ovoNisCodeMapping.Count <= totalItems)
+            while (nisCodes.Count <= totalItems)
             {
                 if (response.Headers.TryGetValues("x-search-metadata", out var metadataJson))
                 {
@@ -50,22 +50,22 @@ namespace NisCodeService.Sync.OrganizationRegistry
                         totalItems = metadata.TotalItems;
                     }
 
-                    await InternalReadNisCodes(response, ovoNisCodeMapping, cancellationToken);
+                    await InternalReadNisCodes(response, nisCodes, cancellationToken);
 
                     response = await httpClient.GetAsync(CreateScrollUri(scrollId), cancellationToken);
                 }
                 else
                 {
-                    await InternalReadNisCodes(response, ovoNisCodeMapping, cancellationToken);
+                    await InternalReadNisCodes(response, nisCodes, cancellationToken);
                 }
 
-                if (ovoNisCodeMapping.Count == totalItems)
+                if (nisCodes.Count == totalItems)
                 {
                     break;
                 }
             }
 
-            return ovoNisCodeMapping;
+            return nisCodes;
         }
 
         private Uri CreateSyncUri()
@@ -75,7 +75,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
 
         private async Task InternalReadNisCodes(
             HttpResponseMessage response,
-            IDictionary<string, string> ovoNisCodeMapping,
+            List<OrganisationNisCode> nisCodes,
             CancellationToken cancellationToken)
         {
             var results =
@@ -88,11 +88,11 @@ namespace NisCodeService.Sync.OrganizationRegistry
 
             foreach (var organization in results)
             {
-                AddOrganizationToCache(ovoNisCodeMapping, organization);
+                AddOrganizationToCache(nisCodes, organization);
             }
         }
 
-        private void AddOrganizationToCache(IDictionary<string, string> ovoNisCodeMapping, Organization organization)
+        private void AddOrganizationToCache(List<OrganisationNisCode> nisCodes, Organization organization)
         {
             var ovoCode = GetOvoCode(organization);
             if (ovoCode is null)
@@ -100,15 +100,9 @@ namespace NisCodeService.Sync.OrganizationRegistry
                 return;
             }
 
-            var nisCode = GetNisCode(organization);
+            var nisCodesForOrganisation = GetNisCodes(organization);
 
-            // TODO: What to do with Niscode "0" (actual first result)
-            if (nisCode is null)
-            {
-                return;
-            }
-
-            ovoNisCodeMapping[ovoCode] = nisCode;
+            nisCodes.AddRange(nisCodesForOrganisation);
         }
 
         private string? GetOvoCode(Organization organization)
@@ -120,17 +114,19 @@ namespace NisCodeService.Sync.OrganizationRegistry
             return ovoCode;
         }
 
-        private string? GetNisCode(Organization organization)
+        private static IEnumerable<OrganisationNisCode> GetNisCodes(Organization organization)
         {
             ArgumentNullException.ThrowIfNull(organization);
             ArgumentNullException.ThrowIfNull(organization.Keys);
 
-            var firstNisCode = organization.Keys
-                .Where(x => x.KeyTypeName is not null)
-                .FirstOrDefault(x => x.KeyTypeName!.Equals("NIS", StringComparison.InvariantCultureIgnoreCase));
+            var allNisCodes = organization.Keys
+                .Where(x => x.KeyTypeName is not null &&
+                            x.KeyTypeName!.Equals("NIS", StringComparison.InvariantCultureIgnoreCase));
 
-            var result = firstNisCode?.Value;
-            return result;
+            foreach (var nisCode in allNisCodes)
+            {
+                yield return new OrganisationNisCode(nisCode.Value!, organization.OvoNumber!, nisCode.Validity?.Start, nisCode.Validity?.End);
+            }
         }
     }
 }

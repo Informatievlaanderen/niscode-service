@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Abstractions;
     using Amazon;
     using Amazon.DynamoDBv2;
     using Amazon.DynamoDBv2.DocumentModel;
@@ -35,7 +36,9 @@
 
             var sut = new DynamoDbNisCodeStorage(dynamoDb);
 
-            var dictToTest = Enumerable.Range(0, 1000).ToDictionary(i => i.ToString(), i => "noescode");
+            var dictToTest = Enumerable.Range(0, 1000)
+                .Select(i => new OrganisationNisCode("niscode", i.ToString(), null, null))
+                .ToList();
 
             await sut.Persist(dictToTest, CancellationToken.None);
 
