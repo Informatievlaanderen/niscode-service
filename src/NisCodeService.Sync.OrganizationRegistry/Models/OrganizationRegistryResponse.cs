@@ -2,6 +2,7 @@
 
 namespace NisCodeService.Sync.OrganizationRegistry.Models
 {
+    using System;
 
     public class OrganizationRegistryResponse
     {
@@ -30,7 +31,7 @@ namespace NisCodeService.Sync.OrganizationRegistry.Models
 
     public class Validity
     {
-        public string? Start { get; set; }
-        public string? End { get; set; }
+        public DateTime? Start { get; set; }
+        public DateTime? End { get; set; }
     }
 }

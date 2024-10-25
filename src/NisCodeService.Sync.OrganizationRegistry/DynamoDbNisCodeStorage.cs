@@ -5,6 +5,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Abstractions;
     using Amazon.DynamoDBv2;
     using Amazon.DynamoDBv2.DocumentModel;
     using Amazon.DynamoDBv2.Model;
@@ -19,9 +20,15 @@ namespace NisCodeService.Sync.OrganizationRegistry
             _dynamoDb = dynamoDb;
         }
 
-        public async Task Persist(IDictionary<string, string> dictionary, CancellationToken ct)
+        public async Task Persist(List<OrganisationNisCode> nisCodes, CancellationToken ct)
         {
             var table = await GetTableAsync();
+
+            var dictionary = new Dictionary<string, string>(
+                nisCodes
+                    .Where(x => x.IsValid(DateTime.Now))
+                    .ToDictionary(x => x.OvoCode, x => x.NisCode),
+                StringComparer.InvariantCultureIgnoreCase);
 
             await DeleteItemsNotInDictionary(dictionary, table, ct);
 

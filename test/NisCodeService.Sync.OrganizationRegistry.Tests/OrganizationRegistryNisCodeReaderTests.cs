@@ -1,5 +1,7 @@
 namespace NisCodeService.Sync.OrganizationRegistry.Tests
 {
+    using System;
+    using System.Linq;
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
@@ -31,10 +33,10 @@ namespace NisCodeService.Sync.OrganizationRegistry.Tests
                 options,
                 new NullLoggerFactory());
 
-            var dictionary = await reader.ReadNisCodes(CancellationToken.None);
+            var readNisCodes = await reader.ReadNisCodes(CancellationToken.None);
 
-            Assert.True(dictionary.ContainsKey(ovoCode ?? "bad ovo code"));
-            Assert.Equal(expectedResult, dictionary[ovoCode ?? "bad ovo code"]);
+            Assert.Contains(readNisCodes, x => string.Equals(x.OvoCode, ovoCode, StringComparison.InvariantCultureIgnoreCase));
+            Assert.Equal(expectedResult, readNisCodes.Single(x => string.Equals(x.OvoCode, ovoCode, StringComparison.InvariantCultureIgnoreCase)).NisCode);
         }
     }
 }

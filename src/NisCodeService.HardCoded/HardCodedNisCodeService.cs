@@ -1,22 +1,37 @@
 ﻿namespace NisCodeService.HardCoded
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Abstractions;
 
     public class HardCodedNisCodeService : INisCodeService
     {
-        public Task<Dictionary<string, string>> GetAll(CancellationToken cancellationToken = default)
+        private readonly Dictionary<string, string> _validNisCodeByOvoCodes;
+
+        public HardCodedNisCodeService()
         {
-            return Task.FromResult(HardCodedNisCodes.NisCodesByOvoCode);
+            _validNisCodeByOvoCodes = new Dictionary<string, string>(
+                HardCodedNisCodes
+                    .AllHardCodedNisCodes
+                    .Where(x => x.IsValid(DateTime.Now))
+                    .ToDictionary(x => x.OvoCode, x=> x.NisCode)
+                , StringComparer.InvariantCultureIgnoreCase);
         }
 
-        public Task<string?> Get(string ovoCode, CancellationToken cancellationToken = default)
+        public Task<Dictionary<string, string>> GetAll(CancellationToken cancellationToken = default)
         {
-            HardCodedNisCodes.NisCodesByOvoCode.TryGetValue(ovoCode, out var nisCode);
+            return Task.FromResult(_validNisCodeByOvoCodes);
+        }
 
-            return Task.FromResult(nisCode);
+        public async Task<string?> Get(string ovoCode, CancellationToken cancellationToken = default)
+        {
+            var result = (await GetAll(cancellationToken))
+                .TryGetValue(ovoCode, out var nisCode);
+
+            return nisCode;
         }
     }
 }
