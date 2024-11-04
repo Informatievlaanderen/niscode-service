@@ -1,5 +1,6 @@
 ﻿namespace NisCodeService.DynamoDb
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
@@ -53,6 +54,11 @@
 
             var response = await _amazonDynamoDb.GetItemAsync(query, cancellationToken);
             return response.Item?.GetValueOrDefault(ColumnNames.NisCode)?.S;
+        }
+
+        public Task<string?> Get(string ovoCode, DateTime validFrom, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
     }
 }
