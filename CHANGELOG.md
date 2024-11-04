@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v4.0.0...v5.0.0) (2024-11-04)
+
+
+### Features
+
+* add get niscode by validFrom date ([f244cc9](https://github.com/informatievlaanderen/niscode-service/commit/f244cc9c596f261d90dbe1baf2275840d208b55b))
+
+
+### BREAKING CHANGES
+
+* Added method INisCodeService
+
 # [4.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v3.0.0...v4.0.0) (2024-10-25)
 
 
