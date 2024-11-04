@@ -38,5 +38,12 @@
 
             return Task.FromResult(nisCodes?.SingleOrDefault(x => x.IsValid(DateTime.Now))?.NisCode);
         }
+
+        public Task<string?> Get(string ovoCode, DateTime validFrom, CancellationToken cancellationToken = default)
+        {
+            _allNisCodeByOvoCodes.TryGetValue(ovoCode, out var nisCodes);
+
+            return Task.FromResult(nisCodes?.SingleOrDefault(x => x.IsValid(validFrom))?.NisCode);
+        }
     }
 }
