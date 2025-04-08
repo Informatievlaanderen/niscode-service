@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/runtime-deps:9.0.3
+FROM mcr.microsoft.com/dotnet/runtime-deps:9.0.4
 
 # create group & user
 RUN addgroup --gid 1000 --system app && adduser --uid 1000 -system app --gid 1000
