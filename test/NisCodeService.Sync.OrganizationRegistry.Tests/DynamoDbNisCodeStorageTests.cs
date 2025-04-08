@@ -57,11 +57,11 @@
                     await dynamoDb.DescribeTableAsync(new DescribeTableRequest(tableName));
                     break;
                 }
-                catch (InternalServerErrorException e)
+                catch (InternalServerErrorException)
                 {
                     await Task.Delay(TimeSpan.FromSeconds(1));
                 }
-                catch (ResourceNotFoundException e)
+                catch (ResourceNotFoundException)
                 {
                     break;
                 }

@@ -107,7 +107,7 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
                         logger)
                     .ConfigureAwait(false);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // logger.LogCritical(e, "Encountered a fatal exception, exiting program.");
                 Log.CloseAndFlush();

@@ -52,7 +52,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
 
                     await InternalReadNisCodes(response, nisCodes, cancellationToken);
 
-                    response = await httpClient.GetAsync(CreateScrollUri(scrollId), cancellationToken);
+                    response = await httpClient.GetAsync(CreateScrollUri(scrollId!), cancellationToken);
                 }
                 else
                 {

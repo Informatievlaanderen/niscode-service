@@ -19,7 +19,7 @@
         public async Task GetAll_ReturnsSameValues()
         {
             // Arrange
-            var sut = new DynamoDbNisCodeService(_fixture.DynamoDb);
+            var sut = new DynamoDbNisCodeService(_fixture.DynamoDb!);
 
             // Act
             var entries = await sut.GetAll();
@@ -33,8 +33,8 @@
         {
             // Arrange
             var r = new Random();
-            var ovoCode = _fixture.OvoNisCodesDictionary.Keys.ElementAt(r.Next(0, 999));
-            var sut = new DynamoDbNisCodeService(_fixture.DynamoDb);
+            var ovoCode = _fixture.OvoNisCodesDictionary!.Keys.ElementAt(r.Next(0, 999));
+            var sut = new DynamoDbNisCodeService(_fixture.DynamoDb!);
 
             // Act
             var entry = await sut.Get(ovoCode);
@@ -48,8 +48,8 @@
         {
             // Arrange
             var r = new Random();
-            var ovoCode = _fixture.OvoNisCodesDictionary.Keys.ElementAt(r.Next(0, 999));
-            var sut = new DynamoDbNisCodeService(_fixture.DynamoDb);
+            var ovoCode = _fixture.OvoNisCodesDictionary!.Keys.ElementAt(r.Next(0, 999));
+            var sut = new DynamoDbNisCodeService(_fixture.DynamoDb!);
 
             // Act
             var lowerCaseEntry = await sut.Get(ovoCode.ToLowerInvariant());
