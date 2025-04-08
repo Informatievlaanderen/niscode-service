@@ -1,0 +1,36 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageVersion Include="Be.Vlaanderen.Basisregisters.Aws.DistributedMutex" Version="5.0.0" />
+
+        <PackageVersion Include="AWSSDK.DynamoDBv2" Version="3.7.406.17" />
+
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.3" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
+
+        <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageVersion Include="Serilog" Version="4.2.0" />
+        <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0" />
+        <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.1" />
+        <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageVersion Include="Serilog.Sinks.File" Version="6.0.0" />
+        <PackageVersion Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+        <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+        <PackageVersion Include="Serilog.Formatting.Compact" Version="3.0.0" />
+
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+        <PackageVersion Include="xunit" Version="2.9.3" />
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+        <PackageVersion Include="FluentAssertions" Version="[7.1.0,8.0.0)" />
+        <PackageVersion Include="Be.Vlaanderen.Basisregisters.DockerUtilities" Version="4.0.0" />
+
+        <PackageVersion Include="SourceLink.Embed.AllSourceFiles" Version="2.8.3" />
+        <PackageVersion Include="SourceLink.Copy.PdbFiles" Version="2.8.3" />
+    </ItemGroup>
+</Project>

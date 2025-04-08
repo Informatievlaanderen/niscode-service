@@ -358,6 +358,11 @@ MigrationBackup/
 
 [Pp]aket-files/
 [Bb]uild/
+.build/**/*
+!.build
+!.build/Be.Vlaanderen.Basisregisters.Build.Pipeline
+!.build/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content
+!.build/Be.Vlaanderen.Basisregisters.Build.Pipeline/Content/*.props
 [Xx]64/
 [Dd]ist/
 [Tt]est[Rr]esults/

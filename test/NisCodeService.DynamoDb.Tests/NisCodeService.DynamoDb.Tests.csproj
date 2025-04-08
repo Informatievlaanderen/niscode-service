@@ -7,7 +7,7 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <Import Project="..\..\packages\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.Test.props" />
+  <Import Project="..\..\.build\Be.Vlaanderen.Basisregisters.Build.Pipeline\Content\Be.Vlaanderen.Basisregisters.Build.Pipeline.Settings.Test.props" />
   <ItemGroup>
     <ProjectReference Include="..\..\src\NisCodeService.Abstractions\NisCodeService.Abstractions.csproj" />
     <ProjectReference Include="..\..\src\NisCodeService.DynamoDb\NisCodeService.DynamoDb.csproj" />
@@ -18,5 +18,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Be.Vlaanderen.Basisregisters.DockerUtilities" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
 </Project>

@@ -47,14 +47,14 @@
             {
                 try
                 {
-                    await DynamoDb.DescribeTableAsync(new DescribeTableRequest(tableName));
+                    await DynamoDb!.DescribeTableAsync(new DescribeTableRequest(tableName));
                     break;
                 }
-                catch (InternalServerErrorException e)
+                catch (InternalServerErrorException)
                 {
                     await Task.Delay(TimeSpan.FromSeconds(1));
                 }
-                catch (ResourceNotFoundException e)
+                catch (ResourceNotFoundException)
                 {
                     break;
                 }
@@ -63,7 +63,7 @@
 
         private async Task SeedDynamo()
         {
-            await DynamoDb.CreateTableAsync(new CreateTableRequest
+            await DynamoDb!.CreateTableAsync(new CreateTableRequest
             {
                 TableName = TableNames.OvoNisCodes,
                 AttributeDefinitions = new List<AttributeDefinition>
@@ -77,7 +77,7 @@
                 BillingMode = BillingMode.PAY_PER_REQUEST
             });
 
-            var batches = OvoNisCodesDictionary
+            var batches = OvoNisCodesDictionary!
                 .Chunk(25)
                 .ToList();
 
