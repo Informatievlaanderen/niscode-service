@@ -1,3 +1,15 @@
+# [6.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v5.0.0...v6.0.0) (2025-04-08)
+
+
+### Code Refactoring
+
+* use renovate and nuget + update pipeline ([74a8e1a](https://github.com/informatievlaanderen/niscode-service/commit/74a8e1aa9b91fa2b98c091c5101350a88609f0a3))
+
+
+### BREAKING CHANGES
+
+* update to dotnet 9
+
 # [5.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v4.0.0...v5.0.0) (2024-11-04)
 
 

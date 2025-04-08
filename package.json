@@ -1,6 +1,6 @@
 {
   "name": "niscode-service",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "A service to get a nis code given an ovo code.",
   "author": "Basisregisters Vlaanderen",
   "license": "EUPL-1.2",
