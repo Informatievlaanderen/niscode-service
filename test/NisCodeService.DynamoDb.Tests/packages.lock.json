@@ -4,11 +4,11 @@
     "net9.0": {
       "AWSSDK.DynamoDBv2": {
         "type": "Direct",
-        "requested": "[3.7.406.17, )",
-        "resolved": "3.7.406.17",
-        "contentHash": "HmCeGXJwbflvvtcLTXIPJsI4XsQslUZ4BPPUmyHNLmQJdORJ8veln/tsNPFWDlhjhZ1KI3jSDTdkQZsxPNqfVg==",
+        "requested": "[3.7.406.25, )",
+        "resolved": "3.7.406.25",
+        "contentHash": "9GcDDNJhsLKLd8X26lQE9Ycs4Qi6W8NDcSOtcp5EvlProxNhJvjkg9rCTVigV6NLc1YxwSUhDkp0nwUEm1A+Kg==",
         "dependencies": {
-          "AWSSDK.Core": "[3.7.402.35, 4.0.0)"
+          "AWSSDK.Core": "[3.7.402.43, 4.0.0)"
         }
       },
       "Be.Vlaanderen.Basisregisters.DockerUtilities": {
@@ -67,8 +67,8 @@
       },
       "AWSSDK.Core": {
         "type": "Transitive",
-        "resolved": "3.7.402.35",
-        "contentHash": "9Jby5BBQTzZOqzQiFjJyr3zCe5GVi64U8gxOlPk3vTTuVJqtkisBJ0Jh1RBj2fNqnWmJLfaWSCLvX1L06zwHnQ=="
+        "resolved": "3.7.402.43",
+        "contentHash": "iAo889ehvfXCORxLF+o7BmKnBAtBTWD7aVMTP+P1sPlHlVqvIj4S3MUaDYjR7b1MGUTsE+UBNyj3tu+cj1MBqA=="
       },
       "Ductus.FluentDocker": {
         "type": "Transitive",
@@ -210,7 +210,7 @@
       "Be.Vlaanderen.Basisregisters.NisCodeService.DynamoDb": {
         "type": "Project",
         "dependencies": {
-          "AWSSDK.DynamoDBv2": "[3.7.406.17, )",
+          "AWSSDK.DynamoDBv2": "[3.7.406.25, )",
           "Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions": "[1.0.0, )",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "[9.0.3, )"
         }
