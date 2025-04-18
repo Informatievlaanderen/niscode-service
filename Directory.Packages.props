@@ -7,7 +7,7 @@
     <ItemGroup>
         <PackageVersion Include="Be.Vlaanderen.Basisregisters.Aws.DistributedMutex" Version="5.0.0" />
 
-        <PackageVersion Include="AWSSDK.DynamoDBv2" Version="3.7.406.17" />
+        <PackageVersion Include="AWSSDK.DynamoDBv2" Version="3.7.406.25" />
 
         <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
         <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.3" />
