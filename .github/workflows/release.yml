@@ -154,21 +154,21 @@ jobs:
         pip install requests markdown argparse
 
     - name: Download NuGet Abstractions
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       continue-on-error: false
       with:
         name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions-${{ needs.set-release-version.outputs.version }}
         path: dist/nuget/
 
     - name: Download NuGet DynamoDb
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       continue-on-error: false
       with:
         name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.DynamoDb-${{ needs.set-release-version.outputs.version }}
         path: dist/nuget/
 
     - name: Download NuGet HardCoded
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       continue-on-error: false
       with:
         name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.HardCoded-${{ needs.set-release-version.outputs.version }}
@@ -217,19 +217,19 @@ jobs:
       run: dotnet --info
 
     - name: Download NuGet Abstractions package
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       with:
         name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.Abstractions-${{ needs.release.outputs.version }}
         path: ~/
 
     - name: Download NuGet DynamoDb package
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       with:
         name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.DynamoDb-${{ needs.release.outputs.version }}
         path: ~/
 
     - name: Download NuGet HardCoded package
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       with:
         name: nuget-Be.Vlaanderen.Basisregisters.NisCodeService.HardCoded-${{ needs.release.outputs.version }}
         path: ~/
