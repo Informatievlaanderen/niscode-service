@@ -3,10 +3,7 @@ namespace NisCodeService.Sync.OrganizationRegistry.Infrastructure
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using Amazon;
     using Amazon.DynamoDBv2;
-    using Amazon.Internal;
-    using Amazon.Runtime;
     using Be.Vlaanderen.Basisregisters.Aws.DistributedMutex;
     using Extensions;
     using Microsoft.Extensions.Configuration;

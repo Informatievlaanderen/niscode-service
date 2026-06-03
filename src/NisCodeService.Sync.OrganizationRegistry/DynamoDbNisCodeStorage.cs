@@ -35,7 +35,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
             await UpsertItemsInDictionary(dictionary, table, ct);
         }
 
-        private static async Task DeleteItemsNotInDictionary(IDictionary<string, string> dictionary, Table table, CancellationToken ct)
+        private static async Task DeleteItemsNotInDictionary(IDictionary<string, string> dictionary, ITable table, CancellationToken ct)
         {
             var allItems = await table.Scan(new ScanFilter()).GetRemainingAsync(ct);
 
@@ -57,7 +57,7 @@ namespace NisCodeService.Sync.OrganizationRegistry
             }
         }
 
-        private static async Task UpsertItemsInDictionary(IDictionary<string, string> dictionary, Table table, CancellationToken ct)
+        private static async Task UpsertItemsInDictionary(IDictionary<string, string> dictionary, ITable table, CancellationToken ct)
         {
             var now = DateTime.UtcNow;
 
@@ -81,11 +81,12 @@ namespace NisCodeService.Sync.OrganizationRegistry
             }
         }
 
-        private async Task<Table> GetTableAsync()
+        private async Task<ITable> GetTableAsync()
         {
             await CreateTableAsync();
-
-            return Table.LoadTable(_dynamoDb, TableNames.OvoNisCodes);
+            return new TableBuilder(_dynamoDb, TableNames.OvoNisCodes)
+                .AddHashKey(ColumnNames.OvoCode, DynamoDBEntryType.String)
+                .Build();
         }
 
         private async Task CreateTableAsync()
