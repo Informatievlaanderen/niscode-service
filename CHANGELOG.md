@@ -1,3 +1,15 @@
+# [7.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v6.0.0...v7.0.0) (2026-06-03)
+
+
+### Features
+
+* update packages + upgrade to dotnet 10 ([1bb9bfb](https://github.com/informatievlaanderen/niscode-service/commit/1bb9bfb15b4d26f424cca9ce693930c5958d6911))
+
+
+### BREAKING CHANGES
+
+* update to dotnet 10
+
 # [6.0.0](https://github.com/informatievlaanderen/niscode-service/compare/v5.0.0...v6.0.0) (2025-04-08)
 
 
