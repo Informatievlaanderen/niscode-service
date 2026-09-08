@@ -9,10 +9,10 @@
 
         <PackageVersion Include="AWSSDK.DynamoDBv2" Version="4.0.19" />
 
-        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.8" />
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.8" />
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.8" />
-        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.12" />
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.12" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.12" />
 
         <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
         <PackageVersion Include="Serilog" Version="4.3.1" />
