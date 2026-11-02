@@ -5,10 +5,10 @@ source https://api.nuget.org/v3/index.json
 nuget AWSSDK.DynamoDBv2 3.7.301.19
 
 // PRODUCTION STUFF
-nuget Microsoft.Extensions.DependencyInjection.Abstractions 8.0.1
-nuget Microsoft.Extensions.Hosting 8.0.0
-nuget Microsoft.Extensions.Http 8.0.0
-nuget Microsoft.Extensions.Logging.Abstractions 8.0.1
+nuget Microsoft.Extensions.DependencyInjection.Abstractions 8.0.2
+nuget Microsoft.Extensions.Hosting 8.0.1
+nuget Microsoft.Extensions.Http 8.0.1
+nuget Microsoft.Extensions.Logging.Abstractions 8.0.3
 nuget Newtonsoft.Json 13.0.3
 
 // VBR STUFF
@@ -19,8 +19,8 @@ nuget Be.Vlaanderen.Basisregisters.Aws.DistributedMutex 4.0.1
 // TEST STUFF
 nuget Moq 4.20.70 strategy:max
 nuget FluentAssertions 6.12.0 strategy:max
-nuget Microsoft.AspNetCore.Mvc.Testing 8.0.3 strategy:max
-nuget Microsoft.AspNetCore.TestHost 8.0.3 strategy:max
+nuget Microsoft.AspNetCore.Mvc.Testing 8.0.33 strategy:max
+nuget Microsoft.AspNetCore.TestHost 8.0.33 strategy:max
 nuget Microsoft.NET.Test.Sdk 17.9.0 strategy:max
 nuget xunit 2.7.0 strategy:max
 nuget xunit.runner.visualstudio 2.5.7 strategy:max
