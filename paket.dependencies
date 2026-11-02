@@ -29,7 +29,7 @@ nuget xunit.runner.visualstudio 2.5.7 strategy:max
 nuget SourceLink.Embed.AllSourceFiles 2.8.3 copy_local: true
 nuget SourceLink.Copy.PdbFiles 2.8.3 copy_local: true
 
-nuget Serilog 3.1.1
+nuget Serilog 4.4.0
 nuget Serilog.Settings.Configuration 8.0.0
 nuget Serilog.Extensions.Logging 8.0.0
 nuget Serilog.Sinks.Console 5.0.1
