@@ -2,7 +2,7 @@ framework: net8.0, netstandard2.1
 strategy: min
 source https://api.nuget.org/v3/index.json
 
-nuget AWSSDK.DynamoDBv2 3.7.301.19
+nuget AWSSDK.DynamoDBv2 3.7.513.4
 
 // PRODUCTION STUFF
 nuget Microsoft.Extensions.DependencyInjection.Abstractions 8.0.1
